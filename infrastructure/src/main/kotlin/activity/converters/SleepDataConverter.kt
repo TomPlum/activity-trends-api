@@ -1,5 +1,6 @@
 package activity.converters
 
+import activity.reader.headers.SleepDataHeaders.*
 import activity.sleep.Mood
 import activity.sleep.SleepSession
 import java.time.LocalDateTime
@@ -10,17 +11,17 @@ class SleepDataConverter {
 
     fun convert(csv: List<Map<String, String>>) = csv.map {
         SleepSession(
-                LocalDateTime.parse(it["Start Time"], dateTimeFormatter),
-                LocalDateTime.parse(it["End Time"], dateTimeFormatter),
-                it["Duration (mins)"]?.toInt() ?: 0,
-                it["Nap"] == "YES",
-                it["Sleep Quality (%)"]?.toInt() ?: 0,
-                it["Time Awake (mins)"]?.toInt() ?: 0,
-                it["Time in REM Slep (mins)"]?.toInt() ?: 0,
-                it["Time in Light Sleep (mins)"]?.toInt() ?: 0,
-                it["Time In Deep Sleep (mins)"]?.toInt() ?: 0,
-                it["Sounds Recorded"]?.toInt() ?: 0,
-                Mood.fromString(it["Wake-up mood"])
+                LocalDateTime.parse(it[START_TIME.header], dateTimeFormatter),
+                LocalDateTime.parse(it[END_TIME.header], dateTimeFormatter),
+                it[DURATION.header]?.toInt() ?: 0,
+                it[NAP.header] == "YES",
+                it[SLEEP_QUALITY.header]?.toInt() ?: 0,
+                it[TIME_AWAKE.header]?.toInt() ?: 0,
+                it[REM_SLEEP.header]?.toInt() ?: 0,
+                it[LIGHT_SLEEP.header]?.toInt() ?: 0,
+                it[DEEP_SLEEP.header]?.toInt() ?: 0,
+                it[SOUNDS_RECORDED.header]?.toInt() ?: 0,
+                Mood.fromString(it[WAKE_UP_MOOD.header])
         )
     }
 }

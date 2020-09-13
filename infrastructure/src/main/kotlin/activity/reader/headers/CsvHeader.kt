@@ -1,4 +1,3 @@
 package activity.reader.headers
 
-interface CsvHeader {
-}
+interface CsvHeader
