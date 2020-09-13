@@ -110,4 +110,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+### Local Properties ###
+local.properties
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,gradle
