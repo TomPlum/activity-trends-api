@@ -1,6 +1,6 @@
 package activity.repositories
 
-import activity.dto.Activity
+import activity.entity.Activity
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface ActivityDataRepository : MongoRepository<String,  Activity>
+interface ActivityDataRepository : MongoRepository<String, Activity>
