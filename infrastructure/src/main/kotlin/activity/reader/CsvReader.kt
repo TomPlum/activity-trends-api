@@ -1,11 +1,10 @@
 package activity.reader
 
 import org.apache.commons.csv.CSVFormat
-import org.apache.commons.csv.CSVRecord
 
 class CsvReader {
-    fun read(fileName: String, format: CSVFormat): MutableList<CSVRecord>? {
+    fun read(fileName: String, format: CSVFormat): List<MutableMap<String, String>> {
         val reader = CsvReader::class.java.getResource("/csv/$fileName.csv").openStream().reader()
-        return CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader).records
+        return format.withFirstRecordAsHeader().parse(reader).records.map { it.toMap() }
     }
 }

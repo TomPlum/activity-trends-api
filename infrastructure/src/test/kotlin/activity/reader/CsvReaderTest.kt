@@ -11,12 +11,12 @@ class CsvReaderTest {
     @Test
     fun read() {
         val result = reader.read("test", CSVFormat.DEFAULT)
-        assertThat(result?.get(0)?.get("Forename")).isEqualTo("Thomas")
+        assertThat(result[0]["Forename"]).isEqualTo("Thomas")
     }
 
     @Test
     fun `Header value contains a space`() {
         val result = reader.read("test", CSVFormat.DEFAULT)
-        assertThat(result?.get(0)?.get("Date of Birth")).isEqualTo("1997-03-02")
+        assertThat(result[0]["Date of Birth"]).isEqualTo("1997-03-02")
     }
 }
