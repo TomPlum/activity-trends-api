@@ -10,7 +10,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":infrastructure:test-support"))
 
+    api("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.mongodb:mongo-java-driver:3.12.7")
     implementation("org.apache.commons:commons-csv:1.8")
 }
@@ -38,8 +40,8 @@ idea {
 task<Test>("integrationTest") {
     description = "Runs the integration tests"
     group = "verification"
-    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
-    classpath = sourceSets["integrationTest"].runtimeClasspath
+    testClassesDirs = sourceSets["integration-test"].output.classesDirs
+    classpath = sourceSets["integration-test"].runtimeClasspath
     mustRunAfter(tasks["test"])
     useJUnitPlatform()
 }

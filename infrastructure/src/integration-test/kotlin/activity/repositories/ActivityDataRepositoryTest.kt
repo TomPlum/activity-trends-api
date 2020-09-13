@@ -9,7 +9,6 @@ class ActivityDataRepositoryTest {
 
     @Test
     fun insert() {
-
     }
 
 }

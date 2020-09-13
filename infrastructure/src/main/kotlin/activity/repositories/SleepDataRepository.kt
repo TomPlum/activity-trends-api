@@ -2,5 +2,8 @@ package activity.repositories
 
 import activity.entity.SleepData
 import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.stereotype.Repository
+import java.util.*
 
-interface SleepDataRepository : MongoRepository<String, SleepData>
+@Repository
+interface SleepDataRepository : MongoRepository<SleepData, UUID>
