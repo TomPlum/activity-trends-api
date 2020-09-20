@@ -3,6 +3,7 @@ package activity.converters
 import activity.reader.headers.SleepDataHeaders.*
 import activity.sleep.Mood
 import activity.sleep.SleepSession
+import toMood
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -21,7 +22,7 @@ class SleepDataConverter {
                 it[LIGHT_SLEEP.header]?.toInt() ?: 0,
                 it[DEEP_SLEEP.header]?.toInt() ?: 0,
                 it[SOUNDS_RECORDED.header]?.toInt() ?: 0,
-                Mood.fromString(it[WAKE_UP_MOOD.header])
+                it[WAKE_UP_MOOD.header]?.toMood() ?: Mood.UNKNOWN
         )
     }
 }
