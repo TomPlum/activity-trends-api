@@ -3,17 +3,18 @@ package activity.converters
 import activity.reader.headers.SleepDataHeaders.*
 import activity.sleep.Mood
 import activity.sleep.SleepSession
-import toMood
+import activity.toMood
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 class SleepDataConverter {
-    private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss +0000")
 
-    fun convert(csv: List<Map<String, String>>) = csv.map {
+
+    fun convert(csv: List<MutableMap<String, String?>>) = csv.map {
         SleepSession(
-                LocalDateTime.parse(it[START_TIME.header], dateTimeFormatter),
-                LocalDateTime.parse(it[END_TIME.header], dateTimeFormatter),
+                it[START_TIME.header]?.toDate() ?: throw IllegalArgumentException("Start Time NULL"),
+                it[END_TIME.header]?.toDate()  ?: throw IllegalArgumentException("End Time NULL"),
                 it[DURATION.header]?.toInt() ?: 0,
                 it[NAP.header] == "YES",
                 it[SLEEP_QUALITY.header]?.toInt() ?: 0,
@@ -24,5 +25,15 @@ class SleepDataConverter {
                 it[SOUNDS_RECORDED.header]?.toInt() ?: 0,
                 it[WAKE_UP_MOOD.header]?.toMood() ?: Mood.UNKNOWN
         )
+    }
+
+    private fun String.toDate(): LocalDateTime {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss +0000")
+        try {
+            return LocalDateTime.parse(this, formatter);
+        } catch (e: DateTimeParseException) {
+            val value = if (this.isEmpty()) "EMPTY" else this;
+            throw IllegalArgumentException("Invalid Date/Time ($value)")
+        }
     }
 }

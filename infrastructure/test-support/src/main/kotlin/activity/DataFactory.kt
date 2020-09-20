@@ -2,7 +2,7 @@ package activity
 
 class DataFactory {
     companion object {
-        fun sleepDataCsvResponse() = listOf(mapOf(
+        fun sleepDataCsvResponse(): List<MutableMap<String, String?>> = listOf(mutableMapOf(
                 Pair("Start Time", "2018-08-21 21:44:03 +0000"),
                 Pair("End Time", "2018-08-22 06:00:56 +0000"),
                 Pair("Duration (mins)", "497"),
