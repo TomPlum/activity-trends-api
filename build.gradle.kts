@@ -8,15 +8,20 @@ buildscript {
     }
 
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.4.0"))
+        classpath(kotlin("gradle-plugin", version = "1.4.10"))
     }
 }
 
 plugins {
     idea
-    kotlin("jvm") version "1.4.0"
+    kotlin("jvm") version "1.4.10"
     id("org.springframework.boot") version "2.3.3.RELEASE"
     id ("io.spring.dependency-management") version "1.0.8.RELEASE"
+}
+
+
+springBoot {
+    mainClassName = "com.github.tomplum.activity.ApplicationKt"
 }
 
 allprojects {
@@ -24,7 +29,6 @@ allprojects {
     version = "0.0.1-SNAPSHOT"
 
     apply(plugin = "kotlin")
-    apply(plugin = "io.spring.dependency-management")
 
     repositories {
         mavenCentral()
@@ -37,17 +41,22 @@ allprojects {
         implementation(kotlin("reflect"))
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE")
-        }
-    }
-
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
     }
 }
 
+subprojects {
+    apply(plugin = "io.spring.dependency-management")
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE")
+        }
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 }

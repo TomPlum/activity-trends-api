@@ -1,4 +1,4 @@
-package activity
+package com.github.tomplum.activity
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan

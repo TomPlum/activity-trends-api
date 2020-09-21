@@ -1,7 +1,7 @@
 package activity.repositories
 
 import activity.IntegrationTest
-import activity.entity.SleepData
+import activity.document.SleepData
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
