@@ -1,5 +1,5 @@
-rootProject.name = "activity-trends-api"
+rootProject.name = "com.github.tomplum.activity-trends-api"
 
 include("presentation", "application", "domain", "infrastructure", "infrastructure:test-support")
 
-project(":presentation").projectDir = File("presentation")
+//project(":presentation").projectDir = File("presentation")

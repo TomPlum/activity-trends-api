@@ -21,7 +21,7 @@ plugins {
 
 
 springBoot {
-    mainClassName = "com.github.tomplum.activity.ApplicationKt"
+    mainClassName = "com.github.tomplum.com.github.tomplum.activity.ApplicationKt"
 }
 
 allprojects {
@@ -48,6 +48,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "kotlin")
 
     dependencyManagement {
         imports {
