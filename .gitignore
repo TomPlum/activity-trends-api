@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/intellij+all,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij+all,gradle
 
@@ -110,7 +109,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
-### Local Properties ###
-local.properties
+### Spring Dev Properties (Don't want to expose certain information) ###
+application-dev.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,gradle
