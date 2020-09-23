@@ -1,4 +1,4 @@
-rootProject.name = "com.github.tomplum.activity-trends-api"
+rootProject.name = "activity-trends-api"
 
 include("presentation", "application", "domain", "infrastructure", "infrastructure:test-support")
 
