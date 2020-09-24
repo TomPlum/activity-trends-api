@@ -19,10 +19,10 @@ plugins {
     id ("io.spring.dependency-management") version "1.0.8.RELEASE"
 }
 
-
+/*
 springBoot {
-    mainClassName = "com.github.tomplum.activity.ApplicationKt"
-}
+    mainClassName = "src.ApplicationKt"
+}*/
 
 allprojects {
     group = "com.github.tomplum"
