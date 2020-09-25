@@ -4,10 +4,12 @@ import com.github.tomplum.activity.dto.SleepDataResponse
 import com.github.tomplum.activity.dto.SleepDataSnapshot
 import com.github.tomplum.activity.sleep.SleepData
 import org.springframework.core.convert.converter.Converter
+import org.springframework.stereotype.Component
 import java.time.format.DateTimeFormatter
 
+@Component
 class SleepDataConverter : Converter<SleepData, SleepDataResponse> {
-    override fun convert(source: SleepData): SleepDataResponse? {
+    override fun convert(source: SleepData): SleepDataResponse {
         val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
         val snapshots = source.snapshots.map { it.data }.map {

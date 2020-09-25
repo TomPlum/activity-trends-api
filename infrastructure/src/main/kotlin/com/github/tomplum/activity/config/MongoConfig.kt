@@ -15,7 +15,7 @@ open class MongoConfig : AbstractMongoClientConfiguration() {
     @Autowired
     private lateinit var props: MongoProperties
 
-    override fun getDatabaseName(): String = "com.github.tomplum.activity-data"
+    override fun getDatabaseName(): String = "activity-data"
 
     override fun mongoClient(): MongoClient {
         val connectionString = ConnectionString(props.host)
