@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class SleepService(private val repository: SleepDataRepository) {
     fun getSleepData(): SleepData {
+        val data = repository.getData()
         return SleepData(listOf())
     }
 }

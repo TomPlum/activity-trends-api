@@ -1,6 +1,6 @@
 package com.github.tomplum.activity.dto
 
-data class SleepDataSnapshot(
+data class SleepSessionResponse(
         val startDate: String,
         val endDate: String,
         val duration: Int,
