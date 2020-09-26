@@ -5,7 +5,7 @@ import java.io.InputStreamReader
 import java.lang.IllegalArgumentException
 
 class CsvReader {
-    fun read(fileName: String, format: CSVFormat) = format
+    fun read(fileName: String, format: CSVFormat = CSVFormat.DEFAULT) = format
             .withFirstRecordAsHeader()
             .withIgnoreSurroundingSpaces()
             .withIgnoreEmptyLines()

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import java.time.format.DateTimeFormatter
 
 @Component
-class SleepDataConverter : Converter<SleepData, SleepDataResponse> {
+class SleepDataResponseConverter : Converter<SleepData, SleepDataResponse> {
     override fun convert(source: SleepData): SleepDataResponse {
         val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 

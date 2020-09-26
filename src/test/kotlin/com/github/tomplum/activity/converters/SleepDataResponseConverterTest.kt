@@ -12,8 +12,8 @@ import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
-class SleepDataConverterTest {
-    private val converter = SleepDataConverter()
+class SleepDataResponseConverterTest {
+    private val converter = SleepDataResponseConverter()
 
     @Test
     fun convert() {
