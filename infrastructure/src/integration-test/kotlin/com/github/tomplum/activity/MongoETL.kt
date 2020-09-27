@@ -11,5 +11,6 @@ class MongoETL(val repository: SleepDataRepository, val reader: CsvReader, val c
     fun upload() {
         val csv = reader.read("sleep")
         val data = converter.convert(csv)
+        repository.insert()
     }
 }
