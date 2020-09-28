@@ -11,17 +11,28 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SleepDataConverterTest {
     private val converter = SleepDataConverter()
     private val csv = DataFactory.sleepDataCsvResponse()
 
     @Nested
+    inner class SnapshotDate {
+        @Test
+        fun date() {
+            val response = converter.convert(csv)
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+            assertThat(response.date.format(formatter)).isEqualTo(LocalDateTime.now().format(formatter))
+        }
+    }
+
+    @Nested
     inner class StartTime {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].startDate).isEqualTo(LocalDateTime.of(2018, 8, 21, 21, 44, 3))
+            assertThat(response.data[0].startDate).isEqualTo(LocalDateTime.of(2018, 8, 21, 21, 44, 3))
         }
 
         @Test
@@ -53,7 +64,7 @@ class SleepDataConverterTest {
         fun valid() {
             val csv = DataFactory.sleepDataCsvResponse()
             val response = converter.convert(csv)
-            assertThat(response[0].endDate).isEqualTo(LocalDateTime.of(2018, 8, 22, 6, 0, 56))
+            assertThat(response.data[0].endDate).isEqualTo(LocalDateTime.of(2018, 8, 22, 6, 0, 56))
         }
 
         @Test
@@ -84,7 +95,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].duration).isEqualTo(497)
+            assertThat(response.data[0].duration).isEqualTo(497)
         }
     }
 
@@ -93,7 +104,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].isNap).isFalse()
+            assertThat(response.data[0].isNap).isFalse()
         }
     }
 
@@ -102,7 +113,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].sleepQuality).isEqualTo(60)
+            assertThat(response.data[0].sleepQuality).isEqualTo(60)
         }
     }
 
@@ -111,7 +122,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].awakeTime).isEqualTo(127)
+            assertThat(response.data[0].awakeTime).isEqualTo(127)
         }
     }
 
@@ -120,7 +131,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].remSleep).isEqualTo(70)
+            assertThat(response.data[0].remSleep).isEqualTo(70)
         }
     }
 
@@ -129,7 +140,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].lightSleep).isEqualTo(150)
+            assertThat(response.data[0].lightSleep).isEqualTo(150)
         }
     }
 
@@ -138,7 +149,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].deepSleep).isEqualTo(150)
+            assertThat(response.data[0].deepSleep).isEqualTo(150)
         }
     }
 
@@ -147,7 +158,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].soundsRecorded).isEqualTo(11)
+            assertThat(response.data[0].soundsRecorded).isEqualTo(11)
         }
     }
 
@@ -156,7 +167,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response[0].mood).isEqualTo(Mood.GOOD)
+            assertThat(response.data[0].mood).isEqualTo(Mood.GOOD)
         }
     }
 }
