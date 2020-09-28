@@ -16,23 +16,19 @@ class SleepSnapshotConverterTest {
 
     @Test
     fun convert() {
-        val source = getMongoDocumentResponse()
+        val source = getSnapshotData()
         val target = converter.convert(listOf(source))
-        assertThat(target).isEqualTo(listOf(getExpectedSleepSnapshot()))
+        assertThat(target).isEqualTo(listOf(getExpectedTarget()))
     }
 
-    private fun getMongoDocumentResponse(): SleepData {
-        val uploadDate = "2020-09-25T21:48"
-        val session = SleepSessionData("2018-08-16T22:16:57", "2018-08-17T05:36:42", 440, false, 56, 90, 50, 170, 130, 65, "Ok")
-        return SleepData(uploadDate, listOf(session))
+    private fun getSnapshotData(): SleepSnapshot {
+        val session = SleepSession(LocalDateTime.of(2020,9,29,22,30,0), LocalDateTime.of(2020,9,30,7,30,0),
+        9, false, 92, 50, 220, 150, 300, 12, Mood.GREAT)
+        return SleepSnapshot(LocalDateTime.of(2020, 9, 28, 20, 0, 0), listOf(session))
     }
 
-    private fun getExpectedSleepSnapshot(): SleepSnapshot {
-        val date = LocalDateTime.of(2020, 9, 25, 21, 48)
-        val data = SleepSession(
-                LocalDateTime.of(2018, 8, 16, 22, 16, 57), LocalDateTime.of(2018, 8, 17, 5, 36, 42),
-                440, false, 56, 90, 50, 170, 130, 65, Mood.OK
-        )
-        return SleepSnapshot(date, listOf(data))
+    private fun getExpectedTarget(): SleepData {
+        val session = SleepSessionData("2020-09-29T22:30:00", "2020-09-30T07:30:00", 9, false, 92, 50, 220, 150, 300, 12, "Great")
+        return SleepData("2020-09-28T20:00:00", listOf(session))
     }
 }

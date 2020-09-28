@@ -3,6 +3,7 @@ package com.github.tomplum.activity.converters
 import com.github.tomplum.activity.reader.headers.SleepDataHeaders.*
 import com.github.tomplum.activity.sleep.Mood
 import com.github.tomplum.activity.sleep.SleepSession
+import com.github.tomplum.activity.reader.CsvReader
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import com.github.tomplum.activity.toMood
 import org.springframework.core.convert.converter.Converter
@@ -11,6 +12,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
+/**
+ * Converts the response of the [CsvReader] into a [SleepSnapshot] Domain Object.
+ */
 @Component
 class SleepDataConverter : Converter<List<MutableMap<String, String?>>, SleepSnapshot> {
 
