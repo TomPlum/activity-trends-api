@@ -1,9 +1,11 @@
 package com.github.tomplum.activity.reader
 
 import org.apache.commons.csv.CSVFormat
+import org.springframework.stereotype.Component
 import java.io.InputStreamReader
 import java.lang.IllegalArgumentException
 
+@Component
 class CsvReader {
     fun read(fileName: String, format: CSVFormat = CSVFormat.DEFAULT) = format
             .withFirstRecordAsHeader()

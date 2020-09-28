@@ -8,12 +8,13 @@ plugins {
 
 dependencies {
     implementation(project(":domain"))
+
     testImplementation(project(":infrastructure:test-support"))
 
-    api("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
-    //implementation("org.mongodb:mongo-java-driver:3.12.7")
     implementation("org.apache.commons:commons-csv:1.8")
 }
 

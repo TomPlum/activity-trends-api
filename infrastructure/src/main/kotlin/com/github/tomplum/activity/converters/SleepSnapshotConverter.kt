@@ -4,8 +4,10 @@ import com.github.tomplum.activity.document.SleepData
 import com.github.tomplum.activity.document.SleepSessionData
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.springframework.core.convert.converter.Converter
+import org.springframework.stereotype.Component
 import java.time.format.DateTimeFormatter
 
+@Component
 class SleepSnapshotConverter : Converter<List<SleepSnapshot>, List<SleepData>> {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
