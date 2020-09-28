@@ -1,6 +1,6 @@
 package com.github.tomplum.activity.controllers
 
-import com.github.tomplum.activity.converters.SleepSnapshotConverter
+import com.github.tomplum.activity.converters.SleepDataResponseConverter
 import com.github.tomplum.activity.dto.SleepDataResponse
 import com.github.tomplum.activity.services.SleepService
 import org.springframework.http.ResponseEntity
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/sleep")
-class SleepController(private val service: SleepService, private val converter: SleepSnapshotConverter) {
+class SleepController(private val service: SleepService, private val converter: SleepDataResponseConverter) {
 
     @GetMapping("/initialise")
     fun initialise(): ResponseEntity<SleepDataResponse> {
