@@ -9,6 +9,7 @@ import java.lang.IllegalArgumentException
 class CsvReader {
     fun read(fileName: String, format: CSVFormat = CSVFormat.DEFAULT) = format
             .withFirstRecordAsHeader()
+            .withTrailingDelimiter()
             .withIgnoreSurroundingSpaces()
             .withIgnoreEmptyLines()
             .parse(getFileReader(fileName))
