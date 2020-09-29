@@ -19,7 +19,7 @@ import java.time.format.DateTimeParseException
 class SleepDataConverter : Converter<List<MutableMap<String, String?>>, SleepSnapshot> {
 
     override fun convert(source: List<MutableMap<String, String?>>): SleepSnapshot {
-        val sessions = source.map {
+        val sessions = source.filter { it[DURATION.header]?.toInt() != 0 }.map {
             SleepSession(
                     it[START_TIME.header]?.toDate() ?: throw IllegalArgumentException("Start Time NULL"),
                     it[END_TIME.header]?.toDate() ?: throw IllegalArgumentException("End Time NULL"),

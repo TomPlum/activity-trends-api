@@ -3,6 +3,7 @@ package com.github.tomplum.activity.converters
 import com.github.tomplum.activity.DataFactory
 import com.github.tomplum.activity.sleep.Mood
 import assertk.assertThat
+import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import org.junit.jupiter.api.Nested
@@ -96,6 +97,13 @@ class SleepDataConverterTest {
         fun valid() {
             val response = converter.convert(csv)
             assertThat(response.data[0].duration).isEqualTo(497)
+        }
+
+        @Test
+        fun `0 Duration should be filtered out from the response`() {
+            csv[0]["Duration (mins)"] = "0"
+            val response = converter.convert(csv)
+            assertThat(response.data).isEmpty()
         }
     }
 
