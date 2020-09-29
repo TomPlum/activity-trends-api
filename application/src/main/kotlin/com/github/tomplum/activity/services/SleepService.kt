@@ -5,7 +5,7 @@ import com.github.tomplum.activity.repositories.SleepDataRepository
 import com.github.tomplum.activity.sleep.SleepData
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Service
 class SleepService(private val repository: SleepDataRepository, private val converter: SleepDocumentConverter) {
@@ -15,7 +15,7 @@ class SleepService(private val repository: SleepDataRepository, private val conv
         return SleepData(snapshots)
     }
 
-    fun getSnapshot(date: LocalDateTime): SleepSnapshot {
+    fun getSnapshot(date: LocalDate): SleepSnapshot {
         val data = repository.findByUploadDate(date.toString())
         val snapshot = converter.convert(listOf(data))
         return snapshot.first()
