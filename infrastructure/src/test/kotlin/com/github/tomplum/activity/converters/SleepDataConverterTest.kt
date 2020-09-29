@@ -131,7 +131,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response.data[0].awakeTime).isEqualTo(127)
+            assertThat(response.data[0].time.awake).isEqualTo(127)
         }
     }
 
@@ -140,7 +140,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response.data[0].remSleep).isEqualTo(70)
+            assertThat(response.data[0].time.rem).isEqualTo(70)
         }
     }
 
@@ -149,7 +149,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response.data[0].lightSleep).isEqualTo(150)
+            assertThat(response.data[0].time.light).isEqualTo(150)
         }
     }
 
@@ -158,7 +158,7 @@ class SleepDataConverterTest {
         @Test
         fun valid() {
             val response = converter.convert(csv)
-            assertThat(response.data[0].deepSleep).isEqualTo(150)
+            assertThat(response.data[0].time.deep).isEqualTo(150)
         }
     }
 

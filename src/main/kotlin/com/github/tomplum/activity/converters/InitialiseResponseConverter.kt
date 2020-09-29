@@ -3,6 +3,7 @@ package com.github.tomplum.activity.converters
 import com.github.tomplum.activity.dto.SleepDataResponse
 import com.github.tomplum.activity.dto.SleepSessionResponse
 import com.github.tomplum.activity.dto.SleepSnapshotResponse
+import com.github.tomplum.activity.dto.SleepTimeResponse
 import com.github.tomplum.activity.sleep.SleepData
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
@@ -15,22 +16,21 @@ class InitialiseResponseConverter : Converter<SleepData, SleepDataResponse> {
 
         val snapshots = source.snapshots.map { snapshot ->
             val sessions = snapshot.data.map { session ->
+                val time = session.time
                 SleepSessionResponse(
                         session.startDate.format(formatter),
                         session.endDate.format(formatter),
                         session.duration,
                         session.isNap,
                         session.sleepQuality,
-                        session.awakeTime,
-                        session.remSleep,
-                        session.lightSleep,
-                        session.deepSleep,
+                        SleepTimeResponse(time.awake, time.light, time.deep, time.rem),
                         session.soundsRecorded,
                         session.mood.value
                 )
             }
 
-            SleepSnapshotResponse(snapshot.date.format(formatter), sessions)
+            val uploadDate = snapshot.date.format(DateTimeFormatter.ISO_LOCAL_DATE)
+            SleepSnapshotResponse(uploadDate, sessions)
         }
 
         return SleepDataResponse(snapshots)

@@ -2,6 +2,7 @@ package com.github.tomplum.activity.converters
 
 import com.github.tomplum.activity.document.SleepData
 import com.github.tomplum.activity.document.SleepSessionData
+import com.github.tomplum.activity.document.SleepSessionTime
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
@@ -18,19 +19,18 @@ class SleepSnapshotConverter : Converter<List<SleepSnapshot>, List<SleepData>> {
     override fun convert(source: List<SleepSnapshot>): List<SleepData> = source.map { snapshot ->
         SleepData(
             snapshot.date.format(DateTimeFormatter.ISO_LOCAL_DATE),
-            snapshot.data.map {
+            snapshot.data.map { session ->
+                val time = session.time
+
                 SleepSessionData(
-                        it.startDate.format(formatter),
-                        it.endDate.format(formatter),
-                        it.duration,
-                        it.isNap,
-                        it.sleepQuality,
-                        it.awakeTime,
-                        it.remSleep,
-                        it.lightSleep,
-                        it.deepSleep,
-                        it.soundsRecorded,
-                        it.mood.value
+                        session.startDate.format(formatter),
+                        session.endDate.format(formatter),
+                        session.duration,
+                        session.isNap,
+                        session.sleepQuality,
+                        SleepSessionTime(time.awake, time.light, time.deep, time.rem),
+                        session.soundsRecorded,
+                        session.mood.value
                 )
             }
         )

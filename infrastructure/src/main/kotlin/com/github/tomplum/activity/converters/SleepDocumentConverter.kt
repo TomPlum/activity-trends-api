@@ -1,9 +1,10 @@
 package com.github.tomplum.activity.converters
 
 import com.github.tomplum.activity.document.SleepData
+import com.github.tomplum.activity.repositories.SleepDataRepository
 import com.github.tomplum.activity.sleep.SleepSession
 import com.github.tomplum.activity.sleep.SleepSnapshot
-import com.github.tomplum.activity.repositories.SleepDataRepository
+import com.github.tomplum.activity.sleep.SleepTime
 import com.github.tomplum.activity.toMood
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
@@ -20,19 +21,17 @@ class SleepDocumentConverter : Converter<List<SleepData>, List<SleepSnapshot>> {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
     override fun convert(source: List<SleepData>): List<SleepSnapshot> = source.map { data ->
-        val sessions = data.sessions.map {
+        val sessions = data.sessions.map { session ->
+            val time = session.time
             SleepSession(
-                    LocalDateTime.parse(it.startDate, formatter),
-                    LocalDateTime.parse(it.endDate, formatter),
-                    it.duration,
-                    it.isNap,
-                    it.sleepQuality,
-                    it.awakeTime,
-                    it.remSleep,
-                    it.lightSleep,
-                    it.deepSleep,
-                    it.soundsRecorded,
-                    it.mood.toMood()
+                    LocalDateTime.parse(session.startDate, formatter),
+                    LocalDateTime.parse(session.endDate, formatter),
+                    session.duration,
+                    session.isNap,
+                    session.sleepQuality,
+                    SleepTime(time.awake, time.light, time.deep, time.rem,),
+                    session.soundsRecorded,
+                    session.mood.toMood()
             )
         }
         val uploadDate = LocalDate.parse(data.uploadDate, DateTimeFormatter.ISO_LOCAL_DATE)
