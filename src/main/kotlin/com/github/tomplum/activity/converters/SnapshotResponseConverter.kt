@@ -10,7 +10,7 @@ class SnapshotResponseConverter : Converter<SleepSnapshot, SleepSnapshotResponse
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
     override fun convert(source: SleepSnapshot): SleepSnapshotResponse {
-        val date = source.date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        val date = source.date.format(DateTimeFormatter.ISO_LOCAL_DATE)
         val data = source.data.map {
             SleepSessionResponse(
                     it.startDate.format(formatter),

@@ -1,13 +1,14 @@
 package com.github.tomplum.activity.converters
 
+import com.github.tomplum.activity.reader.CsvReader
 import com.github.tomplum.activity.reader.headers.SleepDataHeaders.*
 import com.github.tomplum.activity.sleep.Mood
 import com.github.tomplum.activity.sleep.SleepSession
-import com.github.tomplum.activity.reader.CsvReader
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import com.github.tomplum.activity.toMood
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -34,7 +35,7 @@ class SleepDataConverter : Converter<List<MutableMap<String, String?>>, SleepSna
                     it[WAKE_UP_MOOD.header]?.toMood() ?: Mood.UNKNOWN
             )
         }
-        return SleepSnapshot(LocalDateTime.now(), sessions)
+        return SleepSnapshot(LocalDate.now(), sessions)
     }
 
     private fun String.toDate(): LocalDateTime {

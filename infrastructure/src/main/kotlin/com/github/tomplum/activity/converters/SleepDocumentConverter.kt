@@ -7,6 +7,7 @@ import com.github.tomplum.activity.repositories.SleepDataRepository
 import com.github.tomplum.activity.toMood
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -34,6 +35,7 @@ class SleepDocumentConverter : Converter<List<SleepData>, List<SleepSnapshot>> {
                     it.mood.toMood()
             )
         }
-        SleepSnapshot(LocalDateTime.parse(data.uploadDate, formatter), sessions)
+        val uploadDate = LocalDate.parse(data.uploadDate, DateTimeFormatter.ISO_LOCAL_DATE)
+        SleepSnapshot(uploadDate, sessions)
     }
 }

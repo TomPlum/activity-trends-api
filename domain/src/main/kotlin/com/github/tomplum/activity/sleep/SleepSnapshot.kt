@@ -1,5 +1,5 @@
 package com.github.tomplum.activity.sleep
 
-import java.time.LocalDateTime
+import java.time.LocalDate
 
-data class SleepSnapshot(val date: LocalDateTime, val data: List<SleepSession>)
+data class SleepSnapshot(val date: LocalDate, val data: List<SleepSession>)

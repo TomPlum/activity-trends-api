@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -23,8 +24,8 @@ class SleepDataConverterTest {
         @Test
         fun date() {
             val response = converter.convert(csv)
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-            assertThat(response.date.format(formatter)).isEqualTo(LocalDateTime.now().format(formatter))
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            assertThat(response.date.format(formatter)).isEqualTo(LocalDate.now().format(formatter))
         }
     }
 

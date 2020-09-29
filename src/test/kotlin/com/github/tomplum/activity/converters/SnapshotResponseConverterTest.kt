@@ -8,6 +8,7 @@ import com.github.tomplum.activity.sleep.Mood
 import com.github.tomplum.activity.sleep.SleepSession
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class SnapshotResponseConverterTest {
@@ -25,11 +26,11 @@ class SnapshotResponseConverterTest {
         val startDate = LocalDateTime.of(2020, 9, 22, 22, 30, 0)
         val endDate = LocalDateTime.of(2020, 9, 23, 7, 31, 0)
         val session = SleepSession(startDate, endDate, 8, false, 78, 1, 4, 2, 1, 12, Mood.GOOD)
-        return SleepSnapshot(LocalDateTime.of(2020, 9, 20, 16, 0, 0), listOf(session))
+        return SleepSnapshot(LocalDate.of(2020, 9, 20), listOf(session))
     }
 
     private fun getExpected(): SleepSnapshotResponse {
         val snapshotData = SleepSessionResponse("2020-09-22T22:30:00", "2020-09-23T07:31:00", 8, false, 78, 1, 4, 2, 1, 12, "Good")
-        return SleepSnapshotResponse("2020-09-20T16:00:00", listOf(snapshotData))
+        return SleepSnapshotResponse("2020-09-20", listOf(snapshotData))
     }
 }

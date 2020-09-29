@@ -16,7 +16,6 @@ class MongoETL @Autowired constructor(
         private val sleepSnapshotConverter: SleepSnapshotConverter
 ) {
     @Test
-    @Disabled
     fun upload() {
         val csv = reader.read("sleep")
         val snapshot = sleepDataConverter.convert(csv)
