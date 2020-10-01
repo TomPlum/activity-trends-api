@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.converters.SleepConversionService
-import com.github.tomplum.activity.dto.SleepDataResponse
+import com.github.tomplum.activity.dto.SleepInitialiseResponse
 import com.github.tomplum.activity.dto.SleepSnapshotResponse
 import com.github.tomplum.activity.exceptions.SleepDataNotFound
 import com.github.tomplum.activity.exceptions.SnapshotNotFound
@@ -18,9 +18,9 @@ import java.time.LocalDate
 class SleepController(private val service: SleepService, private val converter: SleepConversionService) {
 
     @GetMapping("/initialise")
-    fun initialise(): ResponseEntity<SleepDataResponse> {
+    fun initialise(): ResponseEntity<SleepInitialiseResponse> {
         val data = service.getSleepData()
-        val response = converter.convert(data, SleepDataResponse::class.java) ?: throw SleepDataNotFound()
+        val response = converter.convert(data, SleepInitialiseResponse::class.java) ?: throw SleepDataNotFound()
         return ResponseEntity.ok(response)
     }
 

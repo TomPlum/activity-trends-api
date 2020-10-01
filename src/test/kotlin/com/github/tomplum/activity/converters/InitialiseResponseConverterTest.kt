@@ -2,7 +2,7 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.dto.SleepDataResponse
+import com.github.tomplum.activity.dto.SleepInitialiseResponse
 import com.github.tomplum.activity.dto.SleepSessionResponse
 import com.github.tomplum.activity.dto.SleepSnapshotResponse
 import com.github.tomplum.activity.dto.SleepTimeResponse
@@ -29,10 +29,10 @@ class InitialiseResponseConverterTest {
         return SleepData(listOf(SleepSnapshot(LocalDate.of(2020, 9, 20), listOf(session))))
     }
 
-    private fun getExpected(): SleepDataResponse {
+    private fun getExpected(): SleepInitialiseResponse {
         val time = SleepTimeResponse(1, 1, 4, 2)
         val snapshotData = SleepSessionResponse("2020-09-22T22:30:00", "2020-09-23T07:31:00", 8, false, 78, time, 12, "Good")
         val snapshot = SleepSnapshotResponse("2020-09-20", listOf(snapshotData))
-        return SleepDataResponse(listOf(snapshot))
+        return SleepInitialiseResponse(listOf("2020-09-20"), snapshot)
     }
 }
