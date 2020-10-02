@@ -5,7 +5,7 @@ data class SleepSessionResponse(
         val endDate: String,
         val duration: Int,
         val isNap: Boolean,
-        val sleepQuality: Int,
+        val quality: Int,
         val time: SleepTimeResponse,
         val soundsRecorded: Int,
         val mood: String
