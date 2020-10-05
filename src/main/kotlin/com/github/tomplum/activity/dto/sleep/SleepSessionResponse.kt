@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.dto
+package com.github.tomplum.activity.dto.sleep
 
 data class SleepSessionResponse(
         val startDate: String,

@@ -18,21 +18,21 @@ class SleepDataTest {
         @Test
         fun singleSnapshot() {
             val data = SleepData(listOf(snapshot))
-            val dates = data.getDates()
+            val dates = data.getDates().values
             assertThat(dates).isEqualTo(listOf(LocalDate.of(2020, 10, 1)))
         }
 
         @Test
         fun multipleSnapshots() {
             val data = SleepData(snapshots)
-            val dates = data.getDates()
+            val dates = data.getDates().values
             assertThat(dates).isEqualTo(listOf(LocalDate.of(2020,10,1), LocalDate.of(2020,10,14), LocalDate.of(2020,11,3)))
         }
 
         @Test
         fun noSnapshots() {
             val data = SleepData(emptyList())
-            val dates = data.getDates()
+            val dates = data.getDates().values
             assertThat(dates).isEmpty()
         }
     }

@@ -2,9 +2,9 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.dto.SleepSessionResponse
-import com.github.tomplum.activity.dto.SleepSnapshotResponse
-import com.github.tomplum.activity.dto.SleepTimeResponse
+import com.github.tomplum.activity.dto.sleep.SleepSessionResponse
+import com.github.tomplum.activity.dto.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.dto.sleep.SleepTimeResponse
 import com.github.tomplum.activity.sleep.Mood
 import com.github.tomplum.activity.sleep.SleepSession
 import com.github.tomplum.activity.sleep.SleepSnapshot
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class SnapshotResponseConverterTest {
+class SleepSnapshotResponseConverterTest {
 
-    private val converter = SnapshotResponseConverter()
+    private val converter = SleepSnapshotResponseConverter()
 
     @Test
     fun convert() {

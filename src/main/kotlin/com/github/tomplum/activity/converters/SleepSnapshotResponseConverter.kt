@@ -1,13 +1,13 @@
 package com.github.tomplum.activity.converters
 
-import com.github.tomplum.activity.dto.SleepSessionResponse
-import com.github.tomplum.activity.dto.SleepSnapshotResponse
-import com.github.tomplum.activity.dto.SleepTimeResponse
+import com.github.tomplum.activity.dto.sleep.SleepSessionResponse
+import com.github.tomplum.activity.dto.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.dto.sleep.SleepTimeResponse
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import org.springframework.core.convert.converter.Converter
 import java.time.format.DateTimeFormatter
 
-class SnapshotResponseConverter : Converter<SleepSnapshot, SleepSnapshotResponse> {
+class SleepSnapshotResponseConverter : Converter<SleepSnapshot, SleepSnapshotResponse> {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
     override fun convert(source: SleepSnapshot): SleepSnapshotResponse {

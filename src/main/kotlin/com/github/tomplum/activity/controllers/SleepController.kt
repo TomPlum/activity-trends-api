@@ -1,8 +1,8 @@
 package com.github.tomplum.activity.controllers
 
-import com.github.tomplum.activity.converters.SleepConversionService
-import com.github.tomplum.activity.dto.SleepInitialiseResponse
-import com.github.tomplum.activity.dto.SleepSnapshotResponse
+import com.github.tomplum.activity.converters.service.SleepConversionService
+import com.github.tomplum.activity.dto.sleep.SleepInitialiseResponse
+import com.github.tomplum.activity.dto.sleep.SleepSnapshotResponse
 import com.github.tomplum.activity.exceptions.SleepDataNotFound
 import com.github.tomplum.activity.exceptions.SnapshotNotFound
 import com.github.tomplum.activity.services.SleepService
