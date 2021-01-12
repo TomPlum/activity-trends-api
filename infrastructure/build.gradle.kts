@@ -7,14 +7,16 @@ plugins {
 }
 
 dependencies {
+    //Module Dependencies
     implementation(project(":domain"))
-
     testImplementation(project(":infrastructure:test-support"))
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    //Spring
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    //CSV Reader
     implementation("org.apache.commons:commons-csv:1.8")
 }
 

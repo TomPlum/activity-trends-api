@@ -8,18 +8,17 @@ buildscript {
     }
 
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.4.10"))
+        classpath(kotlin("gradle-plugin", version = "1.4.21"))
     }
 }
 
 plugins {
     idea
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
     id("org.springframework.boot") version "2.3.4.RELEASE"
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     id("com.gorylenko.gradle-git-properties") version "2.2.3"
 }
-
 
 springBoot {
     mainClassName = "com.github.tomplum.activity.ApplicationKt"
@@ -60,9 +59,11 @@ subprojects {
 apply(from = "$rootDir/gradle/testing-dependencies.gradle.kts")
 
 dependencies {
+    //Layers
     implementation(project(":application"))
     implementation(project(":domain"))
 
+    //Presentation Layer Spring
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
