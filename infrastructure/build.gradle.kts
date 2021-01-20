@@ -7,15 +7,22 @@ plugins {
 }
 
 dependencies {
+    //Module Dependencies
     implementation(project(":domain"))
-
     testImplementation(project(":infrastructure:test-support"))
 
+    //Spring
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb") {
+        exclude(group = "com.fasterxml.jackson.dataformat", module = "jackson-dataformat-xml")
+    }
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    implementation("org.springframework.boot:spring-boot-configuration-processor")
+    //Serialisation Libraries
     implementation("org.apache.commons:commons-csv:1.8")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.2")
+
 }
 
 sourceSets {

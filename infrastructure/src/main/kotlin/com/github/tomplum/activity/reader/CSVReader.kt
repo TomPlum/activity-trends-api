@@ -6,8 +6,8 @@ import java.io.InputStreamReader
 import java.lang.IllegalArgumentException
 
 @Component
-class CsvReader {
-    fun read(fileName: String, format: CSVFormat = CSVFormat.DEFAULT) = format
+class CSVReader {
+    fun read(fileName: String, format: CSVFormat = CSVFormat.DEFAULT): List<MutableMap<String, String?>> = format
             .withFirstRecordAsHeader()
             .withTrailingDelimiter()
             .withIgnoreSurroundingSpaces()
@@ -16,7 +16,7 @@ class CsvReader {
             .records.map { it.toMap() }
 
     private fun getFileReader(name: String): InputStreamReader {
-        val resource = CsvReader::class.java.getResource("/csv/$name.csv")
+        val resource = CSVReader::class.java.getResource("/csv/$name.csv")
                 ?: throw IllegalArgumentException("Cannot find file $name")
         return resource.openStream().reader()
     }

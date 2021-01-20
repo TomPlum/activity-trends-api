@@ -6,8 +6,8 @@ import org.apache.commons.csv.CSVFormat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class CsvReaderTest {
-    private val reader = CsvReader()
+class CSVReaderTest {
+    private val reader = CSVReader()
 
     @Test
     fun read() {
