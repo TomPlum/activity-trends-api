@@ -43,4 +43,10 @@ data class Workout (
 
     @JacksonXmlProperty(isAttribute = true, localName = "endDate")
     var endDate: String?,
+
+    @JacksonXmlProperty(localName = "WorkoutEvent")
+    var workoutEvents: List<WorkoutEvent> = emptyList(),
+
+    @JacksonXmlProperty(localName = "WorkoutRoute")
+    var workoutroutes: List<WorkoutRoute> = emptyList(),
 )

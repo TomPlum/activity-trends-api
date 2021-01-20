@@ -8,6 +8,9 @@ data class AppleHealthData(
     @JacksonXmlProperty(localName = "ExportDate")
     var exportDate: ExportDate? = null,
 
+    @JacksonXmlProperty(localName = "Me")
+    var personalData: PersonalData? = null,
+
     @JacksonXmlProperty(localName = "Record")
     var records: List<Record> = emptyList(),
 

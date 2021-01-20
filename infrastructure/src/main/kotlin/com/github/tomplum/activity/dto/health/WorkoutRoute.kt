@@ -3,17 +3,8 @@ package com.github.tomplum.activity.dto.health
 import com.fasterxml.jackson.annotation.JsonRootName
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 
-@JsonRootName("Record")
-data class Record(
-    @JacksonXmlProperty(isAttribute = true, localName = "type")
-    var type: String?,
-
-    @JacksonXmlProperty(isAttribute = true, localName = "unit")
-    var unit: String?,
-
-    @JacksonXmlProperty(isAttribute = true, localName = "value")
-    var value: String?,
-
+@JsonRootName("WorkoutRoot")
+data class WorkoutRoute(
     @JacksonXmlProperty(isAttribute = true, localName = "sourceName")
     var sourceName: String?,
 
@@ -34,7 +25,4 @@ data class Record(
 
     @JacksonXmlProperty(localName = "MetadataEntry")
     var metadata: List<MetadataEntry>? = emptyList(),
-
-    @JacksonXmlProperty(localName = "HeartRateVariabilityMetadataList")
-    var heartRateVariabilityMetadata: HeartRateVariabilityMetadata? = null,
 )
