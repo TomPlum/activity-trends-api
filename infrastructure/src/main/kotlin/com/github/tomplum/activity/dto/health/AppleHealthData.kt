@@ -15,7 +15,7 @@ data class AppleHealthData(
     var records: List<Record> = emptyList(),
 
     @JacksonXmlProperty(localName = "Workout")
-    var workouts: List<Workout> = emptyList(),
+    var workouts: MutableList<Workout> = mutableListOf(),
 
     @JacksonXmlProperty(localName = "ActivitySummary")
     var activitySummaries: List<ActivitySummary> = emptyList()

@@ -1,6 +1,6 @@
 package com.github.tomplum.activity.services
 
-import com.github.tomplum.activity.converters.SleepDocumentConverter
+import com.github.tomplum.activity.converters.sleep.SleepDocumentConverter
 import com.github.tomplum.activity.repositories.SleepDataRepository
 import com.github.tomplum.activity.sleep.SleepData
 import com.github.tomplum.activity.sleep.SleepSnapshot

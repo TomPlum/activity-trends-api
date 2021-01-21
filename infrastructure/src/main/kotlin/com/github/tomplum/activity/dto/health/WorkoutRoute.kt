@@ -25,4 +25,7 @@ data class WorkoutRoute(
 
     @JacksonXmlProperty(localName = "MetadataEntry")
     var metadata: List<MetadataEntry>? = emptyList(),
+
+    @JacksonXmlProperty(localName = "FileReference")
+    var fileReference: FileReference? = null,
 )

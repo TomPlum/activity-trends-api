@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.converters
+package com.github.tomplum.activity.converters.sleep
 
 import com.github.tomplum.activity.document.SleepData
 import com.github.tomplum.activity.repositories.SleepDataRepository

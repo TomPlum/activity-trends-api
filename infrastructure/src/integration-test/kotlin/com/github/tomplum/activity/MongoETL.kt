@@ -1,7 +1,7 @@
 package com.github.tomplum.activity
 
-import com.github.tomplum.activity.converters.SleepDataConverter
-import com.github.tomplum.activity.converters.SleepSnapshotConverter
+import com.github.tomplum.activity.converters.sleep.SleepDataConverter
+import com.github.tomplum.activity.converters.sleep.SleepSnapshotConverter
 import com.github.tomplum.activity.reader.CSVReader
 import com.github.tomplum.activity.repositories.SleepDataRepository
 import org.junit.jupiter.api.Disabled

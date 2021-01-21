@@ -10,5 +10,6 @@ enum class WorkoutType {
     RUNNING,
     CORE_TRAINING,
     HIKING,
-    YOGA
+    YOGA,
+    UNKNOWN
 }

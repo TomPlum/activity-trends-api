@@ -2,6 +2,7 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import com.github.tomplum.activity.converters.sleep.SleepDocumentConverter
 import com.github.tomplum.activity.document.SleepData
 import com.github.tomplum.activity.document.SleepSessionData
 import com.github.tomplum.activity.document.SleepSessionTime
