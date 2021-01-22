@@ -20,7 +20,7 @@ class XMLReader {
             throw IllegalArgumentException("Cannot find file $fileName", e)
         }
         ActivityTrendsLogger.info("Found $fileName.")
-        ActivityTrendsLogger.info("De-serialising into ${T::class.java}.")
+        ActivityTrendsLogger.info("De-serialising into ${T::class.java.simpleName}.")
 
         val mapper = XmlMapper(JacksonXmlModule().apply { setDefaultUseWrapper(false) }).registerKotlinModule()
             .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true)
