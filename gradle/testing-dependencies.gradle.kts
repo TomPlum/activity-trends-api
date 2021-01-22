@@ -7,7 +7,7 @@ dependencies {
     //"testImplementation"("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     //"testImplementation"("org.mockito:mockito-junit-jupiter:3.7.7")
     //"testImplementation"("org.mockito:mockito-core:3.7.7")
-    //"testImplementation"("io.mockk:mockk:1.10.5")
+    "testImplementation"("io.mockk:mockk:1.10.5")
 }
 
 tasks.withType<Test> {
