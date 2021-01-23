@@ -1,4 +1,4 @@
-package com.github.tomplum.activity
+package com.github.tomplum.activity.annotations
 
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.extension.ExtendWith

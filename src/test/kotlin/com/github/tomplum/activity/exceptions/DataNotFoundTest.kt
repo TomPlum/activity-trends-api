@@ -4,9 +4,9 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.junit.jupiter.api.Test
 
-class SnapshotNotFoundTest {
+class DataNotFoundTest {
     @Test
     fun message() {
-        assertThat(SnapshotNotFound("2020-09-29").message).isEqualTo("No Sleep Snapshot Found On 2020-09-29")
+        assertThat(DataNotFound("Sleep Data Not Found").message).isEqualTo("Sleep Data Not Found")
     }
 }

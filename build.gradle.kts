@@ -62,8 +62,10 @@ apply(from = "$rootDir/gradle/testing-dependencies.gradle.kts")
 dependencies {
     implementation(project(":application"))
     implementation(project(":domain"))
+    testImplementation(project(":test-support"))
 
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
 }

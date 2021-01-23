@@ -5,4 +5,4 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import java.lang.RuntimeException
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-class SleepDataNotFound : RuntimeException("Sleep Data Not Found")
+class DataNotFound(message: String) : RuntimeException(message)
