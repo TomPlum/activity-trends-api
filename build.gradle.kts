@@ -39,6 +39,8 @@ allprojects {
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
+
+        testImplementation(project(":test-support"))
     }
 
     tasks.withType<KotlinCompile> {
@@ -63,7 +65,6 @@ dependencies {
     //Layers & Modules
     implementation(project(":application"))
     implementation(project(":domain"))
-    testImplementation(project(":test-support"))
 
     //Spring Boot
     implementation("org.springframework.boot:spring-boot-starter")
@@ -73,7 +74,8 @@ dependencies {
 
     //Swagger
     implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation("io.springfox:springfox-data-rest:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    //implementation("io.springfox:springfox-swagger2:3.0.0")
+    //implementation("io.springfox:springfox-data-rest:3.0.0")
+    //implementation("io.springfox:springfox-swagger-ui:3.0.0")
 
 }

@@ -1,6 +1,7 @@
 package com.github.tomplum.activity.repositories
 
-import com.github.tomplum.activity.EnableMocks
+import com.github.tomplum.activity.annotations.EnableMocks
+import com.github.tomplum.activity.config.HealthDataConfig
 import com.github.tomplum.activity.converters.health.WorkoutSessionConverter
 import com.github.tomplum.activity.dto.health.AppleHealthData
 import com.github.tomplum.activity.reader.XMLReader
@@ -19,13 +20,15 @@ class WorkoutRepositoryTest {
 
     @MockK private lateinit var reader: XMLReader
     @MockK private lateinit var converter: WorkoutSessionConverter
+    @MockK private lateinit var properties: HealthDataConfig
 
     private lateinit var repository: WorkoutRepository
 
     @BeforeEach
     internal fun setUp() {
-        repository = WorkoutRepository(reader, converter)
-        every { reader.read<AppleHealthData>("export.xml") } returns AppleHealthData()
+        repository = WorkoutRepository(reader, converter, properties)
+        every { reader.read<AppleHealthData>(properties.exportPath) } returns AppleHealthData()
+        every { properties.exportPath } returns "export.xml"
     }
 
     @Nested

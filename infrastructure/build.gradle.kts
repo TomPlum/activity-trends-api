@@ -4,6 +4,7 @@ apply(from = "$rootDir/gradle/testing-dependencies.gradle.kts")
 
 plugins {
     idea
+    //kotlin("kapt") version "1.4.21"
 }
 
 dependencies {
@@ -15,14 +16,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb") {
         exclude(group = "com.fasterxml.jackson.dataformat", module = "jackson-dataformat-xml")
     }
-    implementation("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     //Serialisation Libraries
     implementation("org.apache.commons:commons-csv:1.8")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.2")
-
 }
 
 sourceSets {
