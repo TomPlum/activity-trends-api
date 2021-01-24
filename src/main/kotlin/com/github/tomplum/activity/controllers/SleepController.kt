@@ -1,8 +1,8 @@
 package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.converters.service.SleepConversionService
-import com.github.tomplum.activity.dto.sleep.SleepInitialiseResponse
-import com.github.tomplum.activity.dto.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.xml.sleep.SleepInitialiseResponse
+import com.github.tomplum.activity.xml.sleep.SleepSnapshotResponse
 import com.github.tomplum.activity.services.SleepService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

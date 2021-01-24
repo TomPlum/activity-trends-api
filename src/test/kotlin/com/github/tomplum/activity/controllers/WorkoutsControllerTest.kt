@@ -2,7 +2,7 @@ package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.annotations.EnableMocks
 import com.github.tomplum.activity.converters.service.WorkoutConversionService
-import com.github.tomplum.activity.dto.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
 import com.github.tomplum.activity.services.WorkoutService
 import com.github.tomplum.activity.workout.WorkoutSession
 import io.mockk.every

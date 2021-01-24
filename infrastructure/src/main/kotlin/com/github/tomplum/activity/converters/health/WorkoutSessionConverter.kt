@@ -1,6 +1,6 @@
 package com.github.tomplum.activity.converters.health
 
-import com.github.tomplum.activity.dto.health.AppleHealthData
+import com.github.tomplum.activity.xml.health.AppleHealthData
 import com.github.tomplum.activity.workout.Distance
 import com.github.tomplum.activity.workout.Energy
 import com.github.tomplum.activity.workout.WorkoutSession

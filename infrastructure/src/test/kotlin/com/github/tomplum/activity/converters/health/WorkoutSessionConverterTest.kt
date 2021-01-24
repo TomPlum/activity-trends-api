@@ -2,8 +2,8 @@ package com.github.tomplum.activity.converters.health
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.dto.health.AppleHealthData
-import com.github.tomplum.activity.dto.health.Workout
+import com.github.tomplum.activity.xml.health.AppleHealthData
+import com.github.tomplum.activity.xml.health.Workout
 import com.github.tomplum.activity.workout.Distance
 import com.github.tomplum.activity.workout.Energy
 import com.github.tomplum.activity.workout.WorkoutType

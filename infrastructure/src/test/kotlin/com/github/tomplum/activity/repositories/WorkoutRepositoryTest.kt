@@ -3,7 +3,7 @@ package com.github.tomplum.activity.repositories
 import com.github.tomplum.activity.annotations.EnableMocks
 import com.github.tomplum.activity.config.HealthDataConfig
 import com.github.tomplum.activity.converters.health.WorkoutSessionConverter
-import com.github.tomplum.activity.dto.health.AppleHealthData
+import com.github.tomplum.activity.xml.health.AppleHealthData
 import com.github.tomplum.activity.reader.XMLReader
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

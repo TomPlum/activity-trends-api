@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.dto.workouts
+package com.github.tomplum.activity.xml.workouts
 
 data class WorkoutSessionData (
     val type: String,

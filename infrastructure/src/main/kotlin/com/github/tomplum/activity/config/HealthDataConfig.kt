@@ -6,4 +6,3 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 @ConfigurationProperties("data.health")
 open class HealthDataConfig(val exportPath: String)
-

@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.converters
 
-import com.github.tomplum.activity.dto.workouts.WorkoutSessionData
-import com.github.tomplum.activity.dto.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.xml.workouts.WorkoutSessionData
+import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
 import com.github.tomplum.activity.workout.WorkoutSession
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component

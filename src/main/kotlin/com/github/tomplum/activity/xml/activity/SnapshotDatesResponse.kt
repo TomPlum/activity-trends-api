@@ -1,3 +1,3 @@
-package com.github.tomplum.activity.dto.activity
+package com.github.tomplum.activity.xml.activity
 
 data class SnapshotDatesResponse(val sleep: List<String>)

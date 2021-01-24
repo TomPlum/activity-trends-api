@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.dto.activity
+package com.github.tomplum.activity.xml.activity
 
 data class InitialiseResponse(val snapshotDates: SnapshotDatesResponse) {
     companion object {

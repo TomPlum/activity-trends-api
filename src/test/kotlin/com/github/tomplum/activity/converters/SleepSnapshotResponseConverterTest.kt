@@ -2,9 +2,9 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.dto.sleep.SleepSessionResponse
-import com.github.tomplum.activity.dto.sleep.SleepSnapshotResponse
-import com.github.tomplum.activity.dto.sleep.SleepTimeResponse
+import com.github.tomplum.activity.xml.sleep.SleepSessionResponse
+import com.github.tomplum.activity.xml.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.xml.sleep.SleepTimeResponse
 import com.github.tomplum.activity.sleep.Mood
 import com.github.tomplum.activity.sleep.SleepSession
 import com.github.tomplum.activity.sleep.SleepSnapshot

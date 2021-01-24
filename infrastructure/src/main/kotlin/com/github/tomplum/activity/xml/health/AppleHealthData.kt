@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.dto.health
+package com.github.tomplum.activity.xml.health
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement

@@ -2,8 +2,8 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.dto.workouts.WorkoutSessionData
-import com.github.tomplum.activity.dto.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.xml.workouts.WorkoutSessionData
+import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
 import com.github.tomplum.activity.workout.Distance
 import com.github.tomplum.activity.workout.Energy
 import com.github.tomplum.activity.workout.WorkoutSession

@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.reader
 
 import com.github.tomplum.activity.IntegrationTest
-import com.github.tomplum.activity.dto.health.AppleHealthData
+import com.github.tomplum.activity.xml.health.AppleHealthData
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
