@@ -16,6 +16,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb") {
         exclude(group = "com.fasterxml.jackson.dataformat", module = "jackson-dataformat-xml")
     }
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
