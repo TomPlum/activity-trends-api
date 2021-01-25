@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.converters.sleep
 
 import com.github.tomplum.activity.document.SleepData
-import com.github.tomplum.activity.repositories.SleepDataRepository
+import com.github.tomplum.activity.repositories.SleepRepository
 import com.github.tomplum.activity.sleep.SleepSession
 import com.github.tomplum.activity.sleep.SleepSnapshot
 import com.github.tomplum.activity.sleep.SleepTime
@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 /**
- * Converts a List of [SleepData] Document Objects returned from MongoDB via the [SleepDataRepository] into
+ * Converts a List of [SleepData] Document Objects returned from MongoDB via the [SleepRepository] into
  * a List of [SleepSnapshot] Domain Objects.
  */
 @Component
