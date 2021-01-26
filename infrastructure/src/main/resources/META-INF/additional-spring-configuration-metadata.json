@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "data.health.export-path",
+      "type": "java.lang.String",
+      "description": "Description for data.health.export-path."
+  }
+] }

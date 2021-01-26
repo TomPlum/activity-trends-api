@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.converters.service.ActivityConversionService
-import com.github.tomplum.activity.dto.activity.InitialiseResponse
+import com.github.tomplum.activity.xml.activity.InitialiseResponse
 import com.github.tomplum.activity.services.ActivityService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

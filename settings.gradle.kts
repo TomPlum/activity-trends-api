@@ -1,3 +1,3 @@
 rootProject.name = "activity-trends-api"
 
-include(":presentation", ":application", ":domain", ":infrastructure", ":infrastructure:test-support")
+include(":presentation", ":application", ":domain", ":infrastructure", ":infrastructure:test-support", ":test-support")
