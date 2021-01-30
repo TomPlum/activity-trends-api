@@ -2,11 +2,15 @@ package com.github.tomplum.activity.converters.health
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.xml.health.AppleHealthData
-import com.github.tomplum.activity.xml.health.Workout
+import assertk.assertions.isNull
 import com.github.tomplum.activity.workout.Distance
 import com.github.tomplum.activity.workout.Energy
+import com.github.tomplum.activity.workout.Temperature
+import com.github.tomplum.activity.workout.TemperatureUnit.*
 import com.github.tomplum.activity.workout.WorkoutType
+import com.github.tomplum.activity.xml.health.AppleHealthData
+import com.github.tomplum.activity.xml.health.MetadataEntry
+import com.github.tomplum.activity.xml.health.Workout
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -108,7 +112,7 @@ class WorkoutSessionConverterTest {
 
         private fun getDataWithWorkoutType(type: String?): AppleHealthData {
             val data = getValidData()
-            data.workouts[0].workoutActivityType = type
+            data.workouts[0].type = type
             return data
         }
     }
@@ -266,41 +270,108 @@ class WorkoutSessionConverterTest {
         }
     }
 
+    @Nested
+    inner class TimeZoneMetadataConversion {
+        @Test
+        fun `Valid time zone entry`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response[0].timezone).isEqualTo("Europe/London")
+        }
+
+        @Test
+        fun `Workout does not contain a nested MetadataEntry object`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response[1].timezone).isNull()
+        }
+    }
+
+    @Nested
+    inner class WeatherTemperatureMetadataConversion {
+        @Test
+        fun `Valid entry with Fahrenheit unit`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response[0].temperature).isEqualTo(Temperature(33, DEGREES_FAHRENHEIT, 7400))
+        }
+
+        @Test
+        fun `Valid entry with Celsius unit`() {
+            val data = getValidDataWithTemperature("15 degC")
+            val response = converter.convert(data)
+            assertThat(response[0].temperature).isEqualTo(Temperature(15, DEGREES_CELSIUS, null))
+        }
+
+        @Test
+        fun `Invalid temperature unit`() {
+            val data = getValidDataWithTemperature("25 degH")
+            val response = converter.convert(data)
+            assertThat(response[0].temperature).isEqualTo(Temperature(25, UNKNOWN, null))
+        }
+
+        @Test
+        fun `Workout contains no humidity metadata`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response[1].temperature?.humidity).isNull()
+        }
+
+        @Test
+        fun `Workout contains no temperature metadata`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response[1].temperature).isNull()
+        }
+
+        private fun getValidDataWithTemperature(value: String?): AppleHealthData {
+            val data = getValidData()
+            data.workouts[0].metedata = listOf(MetadataEntry("HKWeatherTemperature", value))
+            return data
+        }
+    }
+
     private fun getValidData(): AppleHealthData {
         val data = AppleHealthData()
         data.workouts = mutableListOf(
             Workout(
-                workoutActivityType="HKWorkoutActivityTypeElliptical",
-                duration="16.36445068319638",
-                durationUnit="min",
-                totalDistance="0",
-                totalDistanceUnit="km",
-                totalEnergyBurned="177.234",
-                totalEnergyBurnedUnit="kcal",
-                sourceName="Tom’s Apple Watch",
-                sourceVersion="4.0",
-                device=null,
-                creationDate="2017-10-02 20:10:35 +0100",
-                startDate="2017-10-02 19:54:13 +0100",
-                endDate="2017-10-02 20:10:35 +0100",
-                workoutEvents= emptyList(),
-                workoutroutes= emptyList()
+                type = "HKWorkoutActivityTypeElliptical",
+                duration = "16.36445068319638",
+                durationUnit = "min",
+                totalDistance = "0",
+                totalDistanceUnit = "km",
+                totalEnergyBurned = "177.234",
+                totalEnergyBurnedUnit = "kcal",
+                sourceName = "Tom’s Apple Watch",
+                sourceVersion = "4.0",
+                device = null,
+                creationDate = "2017-10-02 20:10:35 +0100",
+                startDate = "2017-10-02 19:54:13 +0100",
+                endDate = "2017-10-02 20:10:35 +0100",
+                events = emptyList(),
+                routes = emptyList(),
+                metedata = mutableListOf(
+                    MetadataEntry(key = "HKTimeZone", value = "Europe/London"),
+                    MetadataEntry(key = "HKWeatherTemperature", value = "33 degF"),
+                    MetadataEntry(key = "HKWeatherHumidity", value = "7400 %")
+                )
             ),
-            Workout(workoutActivityType="HKWorkoutActivityTypeTraditionalStrengthTraining",
-                duration="46.83198991815249",
-                durationUnit="min",
-                totalDistance="0",
-                totalDistanceUnit="km",
-                totalEnergyBurned="242.7502267543028",
-                totalEnergyBurnedUnit="kcal",
-                sourceName="Tom’s Apple Watch S4",
-                sourceVersion="6.1",
-                device="<<HKDevice: 0x280d77750>, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch4,2, software:6.1>",
-                creationDate="2019-11-02 16:44:43 +0100",
-                startDate="2019-11-02 15:57:52 +0100",
-                endDate="2019-11-02 16:44:42 +0100",
-                workoutEvents=emptyList(),
-                workoutroutes= emptyList()
+            Workout(
+                type = "HKWorkoutActivityTypeTraditionalStrengthTraining",
+                duration = "46.83198991815249",
+                durationUnit = "min",
+                totalDistance = "0",
+                totalDistanceUnit = "km",
+                totalEnergyBurned = "242.7502267543028",
+                totalEnergyBurnedUnit = "kcal",
+                sourceName = "Tom’s Apple Watch S4",
+                sourceVersion = "6.1",
+                device = "<<HKDevice: 0x280d77750>, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch4,2, software:6.1>",
+                creationDate = "2019-11-02 16:44:43 +0100",
+                startDate = "2019-11-02 15:57:52 +0100",
+                endDate = "2019-11-02 16:44:42 +0100",
+                events = emptyList(),
+                routes = emptyList()
             )
         )
         return data

@@ -1,14 +1,13 @@
 package com.github.tomplum.activity.converters.health
 
+import com.github.tomplum.activity.workout.*
 import com.github.tomplum.activity.xml.health.AppleHealthData
-import com.github.tomplum.activity.workout.Distance
-import com.github.tomplum.activity.workout.Energy
-import com.github.tomplum.activity.workout.WorkoutSession
-import com.github.tomplum.activity.workout.WorkoutType
+import com.github.tomplum.activity.xml.health.MetadataEntry
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
@@ -17,16 +16,16 @@ import kotlin.time.toDuration
 @Component
 @ExperimentalTime
 class WorkoutSessionConverter: Converter<AppleHealthData, List<WorkoutSession>> {
-    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z")
-
     override fun convert(source: AppleHealthData): List<WorkoutSession> = source.workouts.map { workout ->
         WorkoutSession(
-            getWorkoutType(workout.workoutActivityType),
+            getWorkoutType(workout.type),
             getDuration(workout.duration, workout.durationUnit),
             getDistance(workout.totalDistance, workout.totalDistanceUnit),
             getEnergy(workout.totalEnergyBurned, workout.totalEnergyBurnedUnit),
-            LocalDateTime.parse(workout.startDate ?: "NULL", dateFormatter),
-            LocalDateTime.parse(workout.endDate ?: "NULL", dateFormatter)
+            getDate(workout.startDate),
+            getDate(workout.endDate),
+            getTimeZone(workout.metedata),
+            getWeatherTemperature(workout.metedata)
         )
     }
 
@@ -57,5 +56,36 @@ class WorkoutSessionConverter: Converter<AppleHealthData, List<WorkoutSession>> 
     private fun getEnergy(value: String?, unit: String?): Energy = when(unit) {
         "kcal" -> Energy(unit, value?.toDoubleOrNull() ?: 0.0)
         else -> throw IllegalArgumentException("Unknown Workout Energy Unit ($unit)")
+    }
+
+    private fun getDate(value: String?): LocalDateTime {
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z")
+        return LocalDateTime.parse(value ?: "NULL", dateFormatter)
+    }
+
+    private fun getTimeZone(meta: List<MetadataEntry>): String? {
+        return meta.getMetaDataEntryValue("HKTimeZone")
+    }
+
+    private fun getWeatherTemperature(meta: List<MetadataEntry>): Temperature? {
+        val string = meta.getMetaDataEntryValue("HKWeatherTemperature") ?: return null
+        val data = string.split(" ")
+        val value = data[0].toInt()
+        val unit = when(data[1]) {
+            "degF" -> TemperatureUnit.DEGREES_FAHRENHEIT
+            "degC" -> TemperatureUnit.DEGREES_CELSIUS
+            else -> TemperatureUnit.UNKNOWN
+        }
+        return Temperature(value, unit, getWeatherHumidity(meta))
+    }
+
+    private fun getWeatherHumidity(meta: List<MetadataEntry>): Int? {
+        val string = meta.getMetaDataEntryValue("HKWeatherHumidity") ?: return null
+        val data = string.split(" ")
+        return data[0].toInt()
+    }
+
+    private fun List<MetadataEntry>.getMetaDataEntryValue(key: String): String? {
+        return filter { entry -> entry.key == key }.map { entry -> entry.value }.firstOrNull()
     }
 }
