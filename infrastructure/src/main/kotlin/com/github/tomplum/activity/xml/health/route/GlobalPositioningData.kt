@@ -2,9 +2,10 @@ package com.github.tomplum.activity.xml.health.route
 
 import com.fasterxml.jackson.annotation.JsonRootName
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import com.github.tomplum.activity.xml.XML
 
 @JsonRootName("gpx")
-data class WorkoutRoute(
+data class GlobalPositioningData(
     @JacksonXmlProperty(isAttribute = true, localName = "version")
     var version: String?,
 
@@ -12,7 +13,8 @@ data class WorkoutRoute(
     var creator: String?,
 
     @JacksonXmlProperty(localName = "metadata")
-    var metadata: Metadata?,
+    var metadata: MetaData?,
 
-
-)
+    @JacksonXmlProperty(localName = "trk")
+    var track: Track?
+): XML

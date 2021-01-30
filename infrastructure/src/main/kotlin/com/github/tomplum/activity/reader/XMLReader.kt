@@ -7,6 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.tomplum.activity.logging.ActivityTrendsLogger
+import com.github.tomplum.activity.xml.XML
 import com.github.tomplum.activity.xml.health.AppleHealthData
 import org.springframework.stereotype.Component
 import java.io.FileNotFoundException
@@ -15,7 +16,7 @@ import kotlin.system.measureTimeMillis
 
 @Component
 class XMLReader {
-    inline fun <reified T : Any> read(fileName: String): T {
+    inline fun <reified T : XML> read(fileName: String): T {
         val reader = try {
             FileReader(fileName)
         } catch (e: FileNotFoundException) {
