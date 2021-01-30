@@ -3,6 +3,8 @@ package com.github.tomplum.activity.converters
 import com.github.tomplum.activity.xml.workouts.WorkoutSessionData
 import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
 import com.github.tomplum.activity.workout.WorkoutSession
+import com.github.tomplum.activity.xml.workouts.TemperatureData
+import com.github.tomplum.activity.xml.workouts.WorkoutMetaData
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 import java.time.format.DateTimeFormatter
@@ -20,7 +22,17 @@ class WorkoutSessionResponseConverter: Converter<List<WorkoutSession>, WorkoutSe
             distance = session.distance.value.toString(),
             energyBurned = session.energyBurned.value.toString(),
             startTime = session.startTime.format(dateFormatter),
-            endTime = session.endTime.format(dateFormatter)
+            endTime = session.endTime.format(dateFormatter),
+            meta = WorkoutMetaData(
+                timeZone = session.timezone,
+                temperature = if (session.temperature != null) {
+                    TemperatureData(
+                        value = session.temperature!!.value,
+                        unit = session.temperature!!.unit.toString(),
+                        humidity = session.temperature!!.humidity
+                    )
+                } else null
+            )
         )
     }.let { sessions -> WorkoutSessionResponse(sessions) }
 }

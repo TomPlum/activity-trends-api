@@ -6,5 +6,6 @@ data class WorkoutSessionData (
     val distance: String,
     val energyBurned: String,
     val startTime: String,
-    val endTime: String
+    val endTime: String,
+    val meta: WorkoutMetaData
 )
