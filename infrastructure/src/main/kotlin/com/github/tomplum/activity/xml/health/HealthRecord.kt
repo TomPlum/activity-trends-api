@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonRootName
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 
 @JsonRootName("Record")
-data class Record(
+data class HealthRecord(
     @JacksonXmlProperty(isAttribute = true, localName = "type")
     var type: String?,
 
@@ -21,7 +21,7 @@ data class Record(
     var sourceVersion: String?,
 
     @JacksonXmlProperty(isAttribute = true, localName = "device")
-    var device: String?,
+    var device: String? = null,
 
     @JacksonXmlProperty(isAttribute = true, localName = "creationDate")
     var creationDate: String?,
