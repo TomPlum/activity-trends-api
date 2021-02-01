@@ -5,6 +5,7 @@ import assertk.assertions.isEqualTo
 import com.github.tomplum.activity.workout.route.ExerciseRoute
 import com.github.tomplum.activity.workout.route.HealthDataSource
 import com.github.tomplum.activity.workout.route.Route
+import com.github.tomplum.activity.workout.route.RoutePoint
 import com.github.tomplum.activity.xml.health.WorkoutRoute
 import com.github.tomplum.activity.xml.health.route.*
 import org.junit.jupiter.api.Test
@@ -14,14 +15,19 @@ class GlobalPositioningDataConverterTest {
     private val converter = GlobalPositioningDataConverter()
 
     @Test
-    fun `Valid`() {
+    fun `Valid data`() {
         val source = getValidData()
         val response = converter.convert(source)
         assertThat(response).isEqualTo(getExpectedExerciseRoute())
     }
 
     private fun getExpectedExerciseRoute() = ExerciseRoute(
-        Route(emptyList()), LocalDateTime.now(), HealthDataSource("Apple Health Export", "1.1")
+        Route(points = mutableListOf(
+            RoutePoint(longitude=-2.538323, latitude=53.252917),
+            RoutePoint(longitude=-2.538320, latitude=53.252903)
+        )),
+        creationDate = LocalDateTime.of(2020, 8, 23, 17, 40, 2),
+        source = HealthDataSource("Apple Health Export", "1.1")
     )
 
     private fun getValidData() = GlobalPositioningData(
