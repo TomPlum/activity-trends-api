@@ -3,10 +3,10 @@ package com.github.tomplum.activity.converters
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.github.tomplum.activity.workout.*
-import com.github.tomplum.activity.xml.workouts.TemperatureData
-import com.github.tomplum.activity.xml.workouts.WorkoutMetaData
-import com.github.tomplum.activity.xml.workouts.WorkoutSessionData
-import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.data.workouts.TemperatureData
+import com.github.tomplum.activity.data.workouts.WorkoutMetaData
+import com.github.tomplum.activity.data.workouts.WorkoutSessionData
+import com.github.tomplum.activity.data.workouts.WorkoutSessionResponse
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import kotlin.time.DurationUnit
@@ -28,12 +28,13 @@ class WorkoutSessionResponseConverterTest {
         return WorkoutSessionResponse(mutableListOf(
             WorkoutSessionData(
                 "RUNNING", "21.5", "2.5", "256.7", "2021-01-02T12:20:00", "2021-01-02T12:41:30",
-                WorkoutMetaData("Europe/London", TemperatureData(24, "DEGREES_FAHRENHEIT", 7400))
+                WorkoutMetaData("Europe/London", TemperatureData(24, "DEGREES_FAHRENHEIT", 7400)),
+                "route_2020-04-05_3.53pm"
             )
         ))
     }
 
-    private fun getSource(): List<WorkoutSession> = mutableListOf(WorkoutSession(
+    private fun getSource() = HealthRecord(mutableListOf(WorkoutSession(
         WorkoutType.RUNNING,
         21.5.toDuration(DurationUnit.MINUTES),
         Distance("km", 2.5),
@@ -41,6 +42,7 @@ class WorkoutSessionResponseConverterTest {
         LocalDateTime.of(2021, 1, 2, 12, 20, 0),
         LocalDateTime.of(2021, 1, 2, 12, 41, 30),
         "Europe/London",
-        Temperature(24, TemperatureUnit.DEGREES_FAHRENHEIT, 7400)
-    ))
+        Temperature(24, TemperatureUnit.DEGREES_FAHRENHEIT, 7400),
+        routeName = "route_2020-04-05_3.53pm"
+    )))
 }

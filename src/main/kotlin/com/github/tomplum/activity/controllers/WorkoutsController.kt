@@ -1,8 +1,8 @@
 package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.converters.service.WorkoutConversionService
-import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
-import com.github.tomplum.activity.services.WorkoutService
+import com.github.tomplum.activity.data.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.services.HealthService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,11 +12,11 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 @RestController
 @RequestMapping("/workouts")
-class WorkoutsController(private val service: WorkoutService, private val converter: WorkoutConversionService) {
+class WorkoutsController(private val service: HealthService, private val converter: WorkoutConversionService) {
     @GetMapping("/sessions")
     fun getWorkoutSessions(): ResponseEntity<WorkoutSessionResponse> {
-        val sessions = service.getWorkoutSessions()
-        val response = converter.convert(sessions, WorkoutSessionResponse::class.java)!!
+        val healthRecord = service.getHealthRecord()
+        val response = converter.convert(healthRecord, WorkoutSessionResponse::class.java)!!
         return ResponseEntity.ok(response)
     }
 }

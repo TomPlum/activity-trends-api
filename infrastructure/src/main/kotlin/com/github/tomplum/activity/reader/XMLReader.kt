@@ -8,11 +8,9 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.tomplum.activity.logging.ActivityTrendsLogger
 import com.github.tomplum.activity.xml.XML
-import com.github.tomplum.activity.xml.health.AppleHealthData
 import org.springframework.stereotype.Component
 import java.io.FileNotFoundException
 import java.io.FileReader
-import kotlin.system.measureTimeMillis
 
 @Component
 class XMLReader {

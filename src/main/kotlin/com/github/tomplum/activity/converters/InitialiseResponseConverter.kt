@@ -1,7 +1,7 @@
 package com.github.tomplum.activity.converters
 
-import com.github.tomplum.activity.xml.activity.InitialiseResponse
-import com.github.tomplum.activity.xml.activity.SnapshotDatesResponse
+import com.github.tomplum.activity.data.activity.InitialiseResponse
+import com.github.tomplum.activity.data.activity.SnapshotDatesResponse
 import com.github.tomplum.activity.sleep.SnapshotDates
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component

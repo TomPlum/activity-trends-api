@@ -7,6 +7,6 @@ import java.lang.annotation.Inherited
 @Inherited
 @SpringBootTest
 @MustBeDocumented
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 @Target(AnnotationTarget.CLASS)
 annotation class IntegrationTest

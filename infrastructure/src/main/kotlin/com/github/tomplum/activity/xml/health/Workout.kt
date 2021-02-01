@@ -48,7 +48,7 @@ data class Workout (
     var events: List<WorkoutEvent> = emptyList(),
 
     @JacksonXmlProperty(localName = "WorkoutRoute")
-    var routes: List<WorkoutRoute> = emptyList(),
+    var route: WorkoutRoute?,
 
     @JacksonXmlProperty(localName = "MetadataEntry")
     var metedata: List<MetadataEntry> = emptyList()

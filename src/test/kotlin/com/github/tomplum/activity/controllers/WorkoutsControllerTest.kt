@@ -2,8 +2,9 @@ package com.github.tomplum.activity.controllers
 
 import com.github.tomplum.activity.annotations.EnableMocks
 import com.github.tomplum.activity.converters.service.WorkoutConversionService
-import com.github.tomplum.activity.xml.workouts.WorkoutSessionResponse
-import com.github.tomplum.activity.services.WorkoutService
+import com.github.tomplum.activity.data.workouts.WorkoutSessionResponse
+import com.github.tomplum.activity.services.HealthService
+import com.github.tomplum.activity.workout.HealthRecord
 import com.github.tomplum.activity.workout.WorkoutSession
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -17,7 +18,7 @@ import kotlin.time.ExperimentalTime
 @EnableMocks
 class WorkoutsControllerTest {
 
-    @RelaxedMockK private lateinit var service: WorkoutService
+    @RelaxedMockK private lateinit var service: HealthService
     @RelaxedMockK private lateinit var conversionService: WorkoutConversionService
     @MockK private lateinit var session: WorkoutSession
 
@@ -26,21 +27,21 @@ class WorkoutsControllerTest {
     @BeforeEach
     internal fun setUp() {
         controller = WorkoutsController(service, conversionService)
-        every { service.getWorkoutSessions() } returns mutableListOf(session)
+        every { service.getHealthRecord() } returns HealthRecord(mutableListOf(session))
         every {
-            conversionService.convert(mutableListOf(session), WorkoutSessionResponse::class.java)
+            conversionService.convert(HealthRecord(mutableListOf(session)), WorkoutSessionResponse::class.java)
         } returns WorkoutSessionResponse(emptyList())
     }
 
     @Test
     fun `Get workout sessions should call service method`() {
         controller.getWorkoutSessions()
-        verify { service.getWorkoutSessions() }
+        verify { service.getHealthRecord() }
     }
 
     @Test
     fun `Get workout sessions should call Spring converter`() {
         controller.getWorkoutSessions()
-        verify { conversionService.convert(mutableListOf(session), WorkoutSessionResponse::class.java) }
+        verify { conversionService.convert(HealthRecord(mutableListOf(session)), WorkoutSessionResponse::class.java) }
     }
 }

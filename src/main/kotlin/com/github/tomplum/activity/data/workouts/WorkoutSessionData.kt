@@ -1,4 +1,4 @@
-package com.github.tomplum.activity.xml.workouts
+package com.github.tomplum.activity.data.workouts
 
 data class WorkoutSessionData (
     val type: String,
@@ -7,5 +7,6 @@ data class WorkoutSessionData (
     val energyBurned: String,
     val startTime: String,
     val endTime: String,
-    val meta: WorkoutMetaData
+    val meta: WorkoutMetaData,
+    val routeName: String?
 )

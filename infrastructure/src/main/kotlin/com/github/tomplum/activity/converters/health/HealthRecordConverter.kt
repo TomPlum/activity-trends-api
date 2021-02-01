@@ -3,11 +3,11 @@ package com.github.tomplum.activity.converters.health
 import com.github.tomplum.activity.workout.*
 import com.github.tomplum.activity.xml.health.AppleHealthData
 import com.github.tomplum.activity.xml.health.MetadataEntry
+import com.github.tomplum.activity.xml.health.WorkoutRoute
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
@@ -15,8 +15,8 @@ import kotlin.time.toDuration
 
 @Component
 @ExperimentalTime
-class WorkoutSessionConverter: Converter<AppleHealthData, List<WorkoutSession>> {
-    override fun convert(source: AppleHealthData): List<WorkoutSession> = source.workouts.map { workout ->
+class HealthRecordConverter: Converter<AppleHealthData, HealthRecord> {
+    override fun convert(source: AppleHealthData): HealthRecord = source.workouts.map { workout ->
         WorkoutSession(
             getWorkoutType(workout.type),
             getDuration(workout.duration, workout.durationUnit),
@@ -25,9 +25,10 @@ class WorkoutSessionConverter: Converter<AppleHealthData, List<WorkoutSession>> 
             getDate(workout.startDate),
             getDate(workout.endDate),
             getTimeZone(workout.metedata),
-            getWeatherTemperature(workout.metedata)
+            getWeatherTemperature(workout.metedata),
+            getRouteName(workout.route)
         )
-    }
+    }.let { workouts -> HealthRecord(workouts) }
 
     private fun getWorkoutType(type: String?): WorkoutType = when(type) {
         "HKWorkoutActivityTypeElliptical" -> WorkoutType.ELLIPTICAL
@@ -87,5 +88,9 @@ class WorkoutSessionConverter: Converter<AppleHealthData, List<WorkoutSession>> 
 
     private fun List<MetadataEntry>.getMetaDataEntryValue(key: String): String? {
         return filter { entry -> entry.key == key }.map { entry -> entry.value }.firstOrNull()
+    }
+
+    private fun getRouteName(route: WorkoutRoute?): String? {
+        return route?.fileReference?.path?.removeSuffix(".gpx")?.takeLastWhile { char -> char != '/' }
     }
 }

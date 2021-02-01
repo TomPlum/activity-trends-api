@@ -8,9 +8,7 @@ import com.github.tomplum.activity.workout.Energy
 import com.github.tomplum.activity.workout.Temperature
 import com.github.tomplum.activity.workout.TemperatureUnit.*
 import com.github.tomplum.activity.workout.WorkoutType
-import com.github.tomplum.activity.xml.health.AppleHealthData
-import com.github.tomplum.activity.xml.health.MetadataEntry
-import com.github.tomplum.activity.xml.health.Workout
+import com.github.tomplum.activity.xml.health.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -25,9 +23,9 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.toDuration
 
 @ExperimentalTime
-class WorkoutSessionConverterTest {
+class HealthRecordConverterTest {
 
-    private val converter = WorkoutSessionConverter()
+    private val converter = HealthRecordConverter()
 
     @Nested
     inner class WorkoutTypeConversion {
@@ -35,70 +33,70 @@ class WorkoutSessionConverterTest {
         fun elliptical() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeElliptical")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.ELLIPTICAL)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.ELLIPTICAL)
         }
 
         @Test
         fun cycling() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeCycling")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.CYCLING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.CYCLING)
         }
 
         @Test
         fun walking() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeWalking")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.WALKING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.WALKING)
         }
 
         @Test
         fun tennis() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeTennis")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.TENNIS)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.TENNIS)
         }
 
         @Test
         fun `Functional Strength Training`() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeFunctionalStrengthTraining")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.FUNCTIONAL_STRENGTH_TRAINING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.FUNCTIONAL_STRENGTH_TRAINING)
         }
 
         @Test
         fun `Traditional Strength Training`() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeTraditionalStrengthTraining")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.TRADITIONAL_STRENGTH_TRAINING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.TRADITIONAL_STRENGTH_TRAINING)
         }
 
         @Test
         fun running() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeRunning")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.RUNNING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.RUNNING)
         }
 
         @Test
         fun `Core Training`() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeCoreTraining")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.CORE_TRAINING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.CORE_TRAINING)
         }
 
         @Test
         fun hiking() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeHiking")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.HIKING)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.HIKING)
         }
 
         @Test
         fun yoga() {
             val data = getDataWithWorkoutType("HKWorkoutActivityTypeYoga")
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.YOGA)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.YOGA)
         }
 
         @ParameterizedTest
@@ -107,7 +105,7 @@ class WorkoutSessionConverterTest {
         fun `Unknown Workout Type`(type: String?) {
             val data = getDataWithWorkoutType(type)
             val response = converter.convert(data)
-            assertThat(response[0].type).isEqualTo(WorkoutType.UNKNOWN)
+            assertThat(response.workouts[0].type).isEqualTo(WorkoutType.UNKNOWN)
         }
 
         private fun getDataWithWorkoutType(type: String?): AppleHealthData {
@@ -123,7 +121,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit & value`() {
             val data = getDataWithDuration("21.28366451660792", "min")
             val response = converter.convert(data)
-            assertThat(response[0].duration).isEqualTo(21.28366451660792.toDuration(DurationUnit.MINUTES))
+            assertThat(response.workouts[0].duration).isEqualTo(21.28366451660792.toDuration(DurationUnit.MINUTES))
         }
 
         @ParameterizedTest
@@ -132,7 +130,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit, but invalid value`(value: String?) {
             val data = getDataWithDuration(value, "min")
             val response = converter.convert(data)
-            assertThat(response[0].duration).isEqualTo(Duration.ZERO)
+            assertThat(response.workouts[0].duration).isEqualTo(Duration.ZERO)
         }
 
         @ParameterizedTest
@@ -158,7 +156,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit & value`() {
             val data = getDataWithDistance("2.8254995231512", "km")
             val response = converter.convert(data)
-            assertThat(response[0].distance).isEqualTo(Distance("km", 2.8254995231512))
+            assertThat(response.workouts[0].distance).isEqualTo(Distance("km", 2.8254995231512))
         }
 
         @ParameterizedTest
@@ -167,7 +165,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit, but invalid value`(value: String?) {
             val data = getDataWithDistance(value, "km")
             val response = converter.convert(data)
-            assertThat(response[0].distance).isEqualTo(Distance("km", 0.0))
+            assertThat(response.workouts[0].distance).isEqualTo(Distance("km", 0.0))
         }
 
         @ParameterizedTest
@@ -193,7 +191,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit & value`() {
             val data = getDataWithEnergy("209.5706979793951", "kcal")
             val response = converter.convert(data)
-            assertThat(response[0].energyBurned).isEqualTo(Energy("kcal", 209.5706979793951))
+            assertThat(response.workouts[0].energyBurned).isEqualTo(Energy("kcal", 209.5706979793951))
         }
 
         @ParameterizedTest
@@ -202,7 +200,7 @@ class WorkoutSessionConverterTest {
         fun `Valid unit, but invalid value`(value: String?) {
             val data = getDataWithEnergy(value, "kcal")
             val response = converter.convert(data)
-            assertThat(response[0].energyBurned).isEqualTo(Energy("kcal", 0.0))
+            assertThat(response.workouts[0].energyBurned).isEqualTo(Energy("kcal", 0.0))
         }
 
         @ParameterizedTest
@@ -228,7 +226,7 @@ class WorkoutSessionConverterTest {
         fun `Valid Date Format`() {
             val data = getDataWithStartDate("2020-03-22 13:15:30 +0100")
             val response = converter.convert(data)
-            assertThat(response[0].startTime).isEqualTo(LocalDateTime.of(2020, 3, 22, 13, 15, 30))
+            assertThat(response.workouts[0].startTime).isEqualTo(LocalDateTime.of(2020, 3, 22, 13, 15, 30))
         }
 
         @ParameterizedTest
@@ -252,7 +250,7 @@ class WorkoutSessionConverterTest {
         fun `Valid Date Format`() {
             val data = getDataWithEndDate("2020-03-22 13:37:27 +0100")
             val response = converter.convert(data)
-            assertThat(response[0].endTime).isEqualTo(LocalDateTime.of(2020, 3, 22, 13, 37, 27))
+            assertThat(response.workouts[0].endTime).isEqualTo(LocalDateTime.of(2020, 3, 22, 13, 37, 27))
         }
 
         @ParameterizedTest
@@ -276,14 +274,14 @@ class WorkoutSessionConverterTest {
         fun `Valid time zone entry`() {
             val data = getValidData()
             val response = converter.convert(data)
-            assertThat(response[0].timezone).isEqualTo("Europe/London")
+            assertThat(response.workouts[0].timezone).isEqualTo("Europe/London")
         }
 
         @Test
         fun `Workout does not contain a nested MetadataEntry object`() {
             val data = getValidData()
             val response = converter.convert(data)
-            assertThat(response[1].timezone).isNull()
+            assertThat(response.workouts[1].timezone).isNull()
         }
     }
 
@@ -293,41 +291,58 @@ class WorkoutSessionConverterTest {
         fun `Valid entry with Fahrenheit unit`() {
             val data = getValidData()
             val response = converter.convert(data)
-            assertThat(response[0].temperature).isEqualTo(Temperature(33, DEGREES_FAHRENHEIT, 7400))
+            assertThat(response.workouts[0].temperature).isEqualTo(Temperature(33, DEGREES_FAHRENHEIT, 7400))
         }
 
         @Test
         fun `Valid entry with Celsius unit`() {
             val data = getValidDataWithTemperature("15 degC")
             val response = converter.convert(data)
-            assertThat(response[0].temperature).isEqualTo(Temperature(15, DEGREES_CELSIUS, null))
+            assertThat(response.workouts[0].temperature).isEqualTo(Temperature(15, DEGREES_CELSIUS, null))
         }
 
         @Test
         fun `Invalid temperature unit`() {
             val data = getValidDataWithTemperature("25 degH")
             val response = converter.convert(data)
-            assertThat(response[0].temperature).isEqualTo(Temperature(25, UNKNOWN, null))
+            assertThat(response.workouts[0].temperature).isEqualTo(Temperature(25, UNKNOWN, null))
         }
 
         @Test
         fun `Workout contains no humidity metadata`() {
             val data = getValidData()
             val response = converter.convert(data)
-            assertThat(response[1].temperature?.humidity).isNull()
+            assertThat(response.workouts[1].temperature?.humidity).isNull()
         }
 
         @Test
         fun `Workout contains no temperature metadata`() {
             val data = getValidData()
             val response = converter.convert(data)
-            assertThat(response[1].temperature).isNull()
+            assertThat(response.workouts[1].temperature).isNull()
         }
 
         private fun getValidDataWithTemperature(value: String?): AppleHealthData {
             val data = getValidData()
             data.workouts[0].metedata = listOf(MetadataEntry("HKWeatherTemperature", value))
             return data
+        }
+    }
+
+    @Nested
+    inner class RouteName {
+        @Test
+        fun `Valid entry with route should trim the file path and take just the name`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response.workouts[0].routeName).isEqualTo("route_2020-04-05_3.53pm")
+        }
+
+        @Test
+        fun `Valid entry with no route should set name as null`() {
+            val data = getValidData()
+            val response = converter.convert(data)
+            assertThat(response.workouts[1].routeName).isNull()
         }
     }
 
@@ -349,7 +364,15 @@ class WorkoutSessionConverterTest {
                 startDate = "2017-10-02 19:54:13 +0100",
                 endDate = "2017-10-02 20:10:35 +0100",
                 events = emptyList(),
-                routes = emptyList(),
+                route = WorkoutRoute(
+                    sourceName = "Tom's Apple Watch",
+                    sourceVersion = "13.4",
+                    device = null,
+                    creationDate = "2020-04-05 16:27:56 +0100",
+                    startDate = "2020-04-05 15:31:53 +0100",
+                    endDate = "2020-04-05 15:53:49 +0100",
+                    fileReference = FileReference(path = "/workout-routes/route_2020-04-05_3.53pm.gpx")
+                ),
                 metedata = mutableListOf(
                     MetadataEntry(key = "HKTimeZone", value = "Europe/London"),
                     MetadataEntry(key = "HKWeatherTemperature", value = "33 degF"),
@@ -371,7 +394,7 @@ class WorkoutSessionConverterTest {
                 startDate = "2019-11-02 15:57:52 +0100",
                 endDate = "2019-11-02 16:44:42 +0100",
                 events = emptyList(),
-                routes = emptyList()
+                route = null
             )
         )
         return data

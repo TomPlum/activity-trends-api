@@ -87,8 +87,9 @@ class XMLReaderTest @Autowired constructor(private val reader: XMLReader) {
                             MetadataEntry(key = "HKTimeZone", value = "Europe/London"),
                             MetadataEntry(key = "HKWeatherTemperature", value = "53 degF"),
                             MetadataEntry(key = "HKWeatherHumidity", value = "8300 %")
-                        )
-                    )
+                        ),
+                        route = null
+                    ),
                 )
             )
         )
