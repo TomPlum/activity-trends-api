@@ -5,7 +5,7 @@ import org.springframework.core.convert.support.GenericConversionService
 import org.springframework.stereotype.Service
 import kotlin.time.ExperimentalTime
 
-@Service
+@Service(value = "InfrastructureWorkoutConverter")
 class WorkoutConversionService: GenericConversionService() {
     @ExperimentalTime
     override fun addConverter(converter: Converter<*, *>) {
