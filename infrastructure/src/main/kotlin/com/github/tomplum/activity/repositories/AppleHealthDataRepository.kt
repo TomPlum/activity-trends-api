@@ -13,7 +13,7 @@ open class AppleHealthDataRepository (
 ) {
     @Cacheable(cacheNames = ["AppleHealthData"])
     open fun read(): AppleHealthData {
-        val path = properties.exportPath + properties.exportPath;
+        val path = properties.exportPath + properties.fileName;
         return reader.read(path);
     }
 }

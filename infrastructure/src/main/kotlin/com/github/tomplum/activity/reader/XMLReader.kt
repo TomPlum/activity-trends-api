@@ -31,7 +31,7 @@ class XMLReader {
     }
 }
 
-inline fun <T> doAndLogTime(action: () -> T): T {
+fun <T> doAndLogTime(action: () -> T): T {
     val startTime = System.currentTimeMillis()
     val result: T = action.invoke()
     val endTime = System.currentTimeMillis()
