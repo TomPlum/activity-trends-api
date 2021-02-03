@@ -5,4 +5,4 @@ import org.springframework.boot.context.properties.ConstructorBinding
 
 @ConstructorBinding
 @ConfigurationProperties("data.health")
-open class HealthDataConfig(val exportPath: String, val fileName: String)
+open class HealthDataConfig(val exportPath: String, val workoutRoutePath: String, val fileName: String)

@@ -7,10 +7,10 @@ import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
 
 @Component
-open class GlobalPositioningDataRepository(val reader: XMLReader, val properties: HealthDataConfig) {
+open class GlobalPositioningDataRepository(private val reader: XMLReader, private val properties: HealthDataConfig) {
     @Cacheable(cacheNames = ["GlobalPositioningData"])
     open fun read(name: String): GlobalPositioningData {
-        val fileName = "$properties.exportPath$name.gpx"
+        val fileName = "${properties.exportPath}${properties.workoutRoutePath}$name.gpx"
         return reader.read(fileName)
     }
 }
