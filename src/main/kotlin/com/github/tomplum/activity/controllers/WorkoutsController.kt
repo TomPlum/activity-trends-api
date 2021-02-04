@@ -22,7 +22,7 @@ class WorkoutsController(private val service: HealthService, private val convert
         return ResponseEntity.ok(response)
     }
 
-    @GetMapping("/session/{routeName}")
+    @GetMapping("/route/{routeName}")
     fun getWorkoutRoute(@PathVariable routeName: String): ResponseEntity<WorkoutRouteResponse> {
         val route = service.getWorkoutExerciseRoute(routeName)
         val response = converter.convert(route, WorkoutRouteResponse::class.java)!!
