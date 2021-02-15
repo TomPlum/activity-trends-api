@@ -1,6 +1,7 @@
 package com.github.tomplum.activity.repositories
 
 import com.github.tomplum.activity.config.HealthDataConfig
+import com.github.tomplum.activity.logging.ActivityTrendsLogger
 import com.github.tomplum.activity.reader.XMLReader
 import com.github.tomplum.activity.xml.health.AppleHealthData
 import org.springframework.cache.annotation.Cacheable
@@ -13,7 +14,8 @@ open class AppleHealthDataRepository (
 ) {
     @Cacheable(cacheNames = ["AppleHealthData"])
     open fun read(): AppleHealthData {
-        val path = properties.exportPath + properties.fileName;
-        return reader.read(path);
+        val path = properties.exportPath + properties.fileName
+        ActivityTrendsLogger.info("Reading AppleHealthData from $path")
+        return reader.read(path)
     }
 }
