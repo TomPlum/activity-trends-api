@@ -10,6 +10,8 @@ data class WorkoutSession @ExperimentalTime constructor(
     val distance: Distance,
     val energyBurned: Energy,
     val startTime: LocalDateTime,
-    val endTime: LocalDateTime
-) {
-}
+    val endTime: LocalDateTime,
+    val timezone: String?,
+    val temperature: Temperature?,
+    val routeName: String?
+)

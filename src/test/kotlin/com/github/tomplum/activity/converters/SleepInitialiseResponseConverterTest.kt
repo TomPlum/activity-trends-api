@@ -2,10 +2,10 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.xml.sleep.SleepInitialiseResponse
-import com.github.tomplum.activity.xml.sleep.SleepSessionResponse
-import com.github.tomplum.activity.xml.sleep.SleepSnapshotResponse
-import com.github.tomplum.activity.xml.sleep.SleepTimeResponse
+import com.github.tomplum.activity.data.sleep.SleepInitialiseResponse
+import com.github.tomplum.activity.data.sleep.SleepSessionResponse
+import com.github.tomplum.activity.data.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.data.sleep.SleepTimeResponse
 import com.github.tomplum.activity.sleep.*
 import org.junit.jupiter.api.Test
 import java.time.LocalDate

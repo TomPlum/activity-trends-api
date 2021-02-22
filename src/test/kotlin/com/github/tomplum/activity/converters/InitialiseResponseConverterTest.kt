@@ -2,8 +2,8 @@ package com.github.tomplum.activity.converters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.tomplum.activity.xml.activity.InitialiseResponse
-import com.github.tomplum.activity.xml.activity.SnapshotDatesResponse
+import com.github.tomplum.activity.data.activity.InitialiseResponse
+import com.github.tomplum.activity.data.activity.SnapshotDatesResponse
 import com.github.tomplum.activity.sleep.SnapshotDates
 import org.junit.jupiter.api.Test
 import java.time.LocalDate

@@ -1,9 +1,9 @@
 package com.github.tomplum.activity.converters
 
-import com.github.tomplum.activity.xml.sleep.SleepInitialiseResponse
-import com.github.tomplum.activity.xml.sleep.SleepSessionResponse
-import com.github.tomplum.activity.xml.sleep.SleepSnapshotResponse
-import com.github.tomplum.activity.xml.sleep.SleepTimeResponse
+import com.github.tomplum.activity.data.sleep.SleepInitialiseResponse
+import com.github.tomplum.activity.data.sleep.SleepSessionResponse
+import com.github.tomplum.activity.data.sleep.SleepSnapshotResponse
+import com.github.tomplum.activity.data.sleep.SleepTimeResponse
 import com.github.tomplum.activity.sleep.SleepData
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component

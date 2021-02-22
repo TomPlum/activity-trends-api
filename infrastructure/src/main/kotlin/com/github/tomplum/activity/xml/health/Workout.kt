@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 @JsonRootName("Workout")
 data class Workout (
     @JacksonXmlProperty(isAttribute = true, localName = "workoutActivityType")
-    var workoutActivityType: String?,
+    var type: String?,
 
     @JacksonXmlProperty(isAttribute = true, localName = "duration")
     var duration: String?,
@@ -33,7 +33,7 @@ data class Workout (
     var sourceVersion: String?,
 
     @JacksonXmlProperty(isAttribute = true, localName = "device")
-    var device: String?,
+    var device: String? = null,
 
     @JacksonXmlProperty(isAttribute = true, localName = "creationDate")
     var creationDate: String?,
@@ -45,8 +45,11 @@ data class Workout (
     var endDate: String?,
 
     @JacksonXmlProperty(localName = "WorkoutEvent")
-    var workoutEvents: List<WorkoutEvent> = emptyList(),
+    var events: List<WorkoutEvent> = emptyList(),
 
     @JacksonXmlProperty(localName = "WorkoutRoute")
-    var workoutroutes: List<WorkoutRoute> = emptyList(),
+    var route: WorkoutRoute?,
+
+    @JacksonXmlProperty(localName = "MetadataEntry")
+    var metedata: List<MetadataEntry> = emptyList()
 )
